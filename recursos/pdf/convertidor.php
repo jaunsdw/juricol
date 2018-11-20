@@ -1,23 +1,21 @@
 
 <?php
-
+    
     $fileName = $_SERVER['DOCUMENT_ROOT']."/juricol/recursos/pdf/ESTADO3.pdf";
     $reader = new \Asika\Pdf2text;
     $datosConvertidos = $reader->decode($fileName);
     $totalDemandas = obtenerDemandas($datosConvertidos);
 
-    print_r($totalDemandas);
+    $demandasJuricol = cambiosDeEstado($totalDemandas,$miConexion);
 
-    $demandasJuricol = cambiosDeEstado($totalDemandas);
+    echo json_encode($demandasJuricol);
 
-    print_r($demandasJuricol);
-
-
+    
     
 
 
 
-    function cambiosDeEstado($demandas){
+    function cambiosDeEstado($demandas,$miConexion){
         $num = count($demandas);
         $i = 0;
         $demandasJuricol = array("IdDemanda"=>NULL,
@@ -29,15 +27,59 @@
                                 "FechaCambio"=>NULL,
                                 "DiasRestantes"=>NULL);
 
+        $total = array();
+        $juricol = NULL;
+        while ($i < $num) {
 
-        return $demandasJuricol;
+            $juricol = verificarExistencia($demandas[$i]['NumeroRadicado'],$miConexion);
+
+            if($juricol == NULL || empty($juricol) ){
+
+                $i++;
+            }else{
+
+                $demandasJuricol = array("IdDemanda"=>$juricol[0]['IdDemanda'],
+                                        "NumDemanda"=>$juricol[0]['NumDemanda'],
+                                        "Demandante"=>$demandas[$i]['Demandante'],
+                                        "Demandado"=>$demandas[$i]['Demandado'],
+                                        "Titular"=>$juricol[0]['Titular'],
+                                        "NuevoEstado"=>$demandas[$i]['NuevoEstado'],
+                                        "FechaCambio"=>$demandas[$i]['FechaCambio'],
+                                        "DiasRestantes"=>NULL);
+
+                array_push($total,$demandasJuricol);
+
+                $i++;
+            }
+        }
+
+
+        return $total;
         
     }
 
-    function verificarExistencia(Type $var = n){
+    function verificarExistencia($NumDemanda,$miConexion){
+
+        $sql="SELECT 
+                D.Id AS 'IdDemanda',
+                D.NumDemanda AS 'NumDemanda',
+                CONCAT(E.PrimerNombre,' ',E.SegundoNombre,' ',E.PrimerApellido,' ',E.SegundoApellido) AS 'Titular'
+                FROM demandas AS D 
+                    INNER JOIN empleados AS E
+                        ON D.Titular_id = E.Id
+                WHERE	D.NumDemanda = '$NumDemanda'";
+
+        $miConexion->EjecutarSQL($sql);
+                
+        $resultado = $miConexion->GetResultados();
+
+        if( empty($resultado) || $resultado == NULL){
+            return NULL;
+        }else {
+            return $resultado;    
+        }
         
     }
-
 
 
     function obtenerDemandas($datosConvertidos){
