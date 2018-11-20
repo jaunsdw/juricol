@@ -1,17 +1,42 @@
 
 <?php
 
-    require_once ('../../../vendor/autoload.php');
-    $fileName = $_SERVER['DOCUMENT_ROOT']."/juricol/recursos/pdf/ESTADO1.pdf";
+    $fileName = $_SERVER['DOCUMENT_ROOT']."/juricol/recursos/pdf/ESTADO3.pdf";
     $reader = new \Asika\Pdf2text;
     $datosConvertidos = $reader->decode($fileName);
     $totalDemandas = obtenerDemandas($datosConvertidos);
 
     print_r($totalDemandas);
 
+    $demandasJuricol = cambiosDeEstado($totalDemandas);
+
+    print_r($demandasJuricol);
+
 
     
 
+
+
+    function cambiosDeEstado($demandas){
+        $num = count($demandas);
+        $i = 0;
+        $demandasJuricol = array("IdDemanda"=>NULL,
+                                "NumDemanda"=>NULL,
+                                "Demandante"=>NULL,
+                                "Demandado"=>NULL,
+                                "Titular"=>NULL,
+                                "NuevoEstado"=>NULL,
+                                "FechaCambio"=>NULL,
+                                "DiasRestantes"=>NULL);
+
+
+        return $demandasJuricol;
+        
+    }
+
+    function verificarExistencia(Type $var = n){
+        
+    }
 
 
 
