@@ -16,15 +16,16 @@
                 $accion = validarAccion($_GET['accion']);
                 $token = apache_request_headers();
                 $token = $token['Authorization'];
-                
             }else{
                 if(!(isset($post_vars["token"])) ||  $post_vars["token"] == NULL || empty($post_vars["token"])){
                     $token = NULL;
+                }else {
+                    $token = $post_vars["token"];
                 }
                 @$accion = validarAccion($post_vars["accion"]);
             }
 
-            @acceder($accion,$post_vars["token"],$post_vars);
+            acceder($accion,$token,$post_vars);
     
         }elseif ($_SERVER['REQUEST_METHOD'] == "GET") {
 
@@ -74,7 +75,12 @@
 
         if(gettype($accion) != "array"){
 
-            extract($info);
+            if($info == NULL || empty($info)){
+                $info = NULL;
+            }else {
+                extract($info);
+            }
+            
 
             if( $accion != 'validar'){
                 if(!(isset($token)) || $token == NULL || empty($token)){
