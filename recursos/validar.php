@@ -40,10 +40,14 @@
         header("Access-Control-Allow-Methods: DELETE"); //Admicion para el metodo delete en especifico 
         extract($_GET);
     }else{
-        
+        $respuesta->preparar(404,"Llamado por metodo incorrecto");
+        $respuesta->responder();
+        exit();
     }
 
     if( $accion != 'validar'){
+
+
         if(!(isset($token)) || $token == NULL || empty($token)){
             $respuesta->preparar(401,'No existe token');
             $respuesta->responder();
@@ -59,10 +63,11 @@
             }
 
         }
+        
     }else{
         require_once("usuarios/validarUsuario.php");
     }
 
-    
+
 
 ?>
