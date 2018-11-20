@@ -28,7 +28,7 @@
                 $respuesta->preparar(404,"contaseña error"); 
                 }else{
                     $respuesta->preparar(200,"Acceso correcto");
-                    $datos = array('usuario' => $usuario);
+                    $datos = array('usuario' => $usuario,'IdUsuario'=> $resultado[0]['Id']);
                     $miToken->prepararToken($datos);
                 }   
         }
