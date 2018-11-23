@@ -1,23 +1,45 @@
 
 <?php
-    
-    $fileName = $_SERVER['DOCUMENT_ROOT']."/juricol/recursos/pdf/ESTADO3.pdf";
+   
+    $fileName = $_FILES['MiArchivo']["tmp_name"];
     $reader = new \Asika\Pdf2text;
     $datosConvertidos = $reader->decode($fileName);
-    $totalDemandas = obtenerDemandas($datosConvertidos);
+    if ($miConexion->GetCodigoRespuesta() == 503 ){
+        $respuesta->preparar(503,"Servicio No disponible BD");
+        $respuesta->responder();
+    }else{
+        
+        $diasEstados =  consultarEstados($miConexion);
 
-    $demandasJuricol = cambiosDeEstado($totalDemandas,$miConexion);
+        if(empty($diasEstados) || $diasEstados == NULL){
+            $respuesta->preparar(200,"No hay estados registrados");
+            $respuesta->responder();
+        }else{
 
-    echo json_encode($demandasJuricol);
+            $totalDemandas = obtenerDemandas($datosConvertidos);
+            $demandasJuricol = cambiosDeEstado($totalDemandas,$miConexion,$diasEstados);
+            
 
-    
-    
+            if( empty($demandasJuricol) || $demandasJuricol == NULL){
+                $respuesta->preparar(200,"No hay cambios en demandas");
+                $respuesta->responder();
+            }else {
+                $respuesta->preparar(200,$demandasJuricol);
+                $respuesta->responder();
+            }
+        }
+    }
+
+  
 
 
 
-    function cambiosDeEstado($demandas,$miConexion){
+    function cambiosDeEstado($demandas,$miConexion,$diasEstados){
+
         $num = count($demandas);
+
         $i = 0;
+
         $demandasJuricol = array("IdDemanda"=>NULL,
                                 "NumDemanda"=>NULL,
                                 "Demandante"=>NULL,
@@ -26,37 +48,113 @@
                                 "NuevoEstado"=>NULL,
                                 "FechaCambio"=>NULL,
                                 "DiasRestantes"=>NULL);
-
         $total = array();
-        $juricol = NULL;
-        while ($i < $num) {
 
+        $juricol = NULL;
+
+        while ($i < $num) {
             $juricol = verificarExistencia($demandas[$i]['NumeroRadicado'],$miConexion);
 
             if($juricol == NULL || empty($juricol) ){
 
                 $i++;
+
             }else{
+                $fechaCambio = str_replace('/','-',$demandas[$i]['FechaCambio']);
 
-                $demandasJuricol = array("IdDemanda"=>$juricol[0]['IdDemanda'],
-                                        "NumDemanda"=>$juricol[0]['NumDemanda'],
-                                        "Demandante"=>$demandas[$i]['Demandante'],
-                                        "Demandado"=>$demandas[$i]['Demandado'],
-                                        "Titular"=>$juricol[0]['Titular'],
-                                        "NuevoEstado"=>$demandas[$i]['NuevoEstado'],
-                                        "FechaCambio"=>$demandas[$i]['FechaCambio'],
-                                        "DiasRestantes"=>NULL);
+                $fechaInicio = new DateTime($fechaCambio);
 
-                array_push($total,$demandasJuricol);
+                $result = calcularFechaLimite($fechaInicio->format('Y-m-d'),$demandas[$i]['NuevoEstado'],$miConexion,$diasEstados);
 
-                $i++;
+
+                if($result['Error'] == NULL){
+
+                    $demandasJuricol = array("IdDemanda"=>$juricol[0]['IdDemanda'],
+                    "NumDemanda"=>$juricol[0]['NumDemanda'],
+                    "Demandante"=>$demandas[$i]['Demandante'],
+                    "Demandado"=>$demandas[$i]['Demandado'],
+                    "Titular"=>$juricol[0]['Titular'],
+                    "NuevoEstado"=>$demandas[$i]['NuevoEstado'],
+                    "FechaCambio"=>$fechaInicio->format('Y-m-d'),
+                    "FechaLimite"=>$result['FechaLimite'],
+                    "EstadoProbable"=>$result["EstadoProbable"]);
+
+                    array_push($total,$demandasJuricol);
+
+                    
+                    $i++;
+                }else {
+
+                    $demandasJuricol = $result['Error'];
+                    array_push($total,$demandasJuricol);
+
+                    $i++;
+                }
+
             }
         }
-
 
         return $total;
         
     }
+
+    function  consultarEstados($miConexion){
+        
+        $sql="SELECT    Descripcion,
+                        DiasLimite 
+                    FROM estadosDemandas";
+
+        $miConexion->EjecutarSQL($sql);        
+
+        $resultado = $miConexion->GetResultados();
+
+        if( empty($resultado) || $resultado == NULL){
+
+            return NULL;
+
+        }else {
+
+            return $resultado;    
+        }
+    }
+
+    function calcularFechaLimite($fechaInicio,$estado,$miConexion,$diasEstados){
+        
+        $result = array("EstadoProbable"=>NULL,"FechaLimite"=>NULL,"Error"=>NULL);
+
+        $fechaFin = new DateTime($fechaInicio);
+
+        $num = count($diasEstados);
+        $i = 0;
+
+        while ($i < $num) {
+            $descripcion = utf8_encode($diasEstados[$i]['Descripcion']);
+            similar_text($descripcion, $estado, $porcentaje);
+   
+            if($porcentaje == 100){
+                
+                $fechaFin->add(new DateInterval('P'.$diasEstados[$i]['DiasLimite'].'D'));
+                $result["FechaLimite"] = $fechaFin->format('Y-m-d');
+                $i++;
+
+            }elseif($porcentaje >= 93){
+                $fechaFin->add(new DateInterval('P'.$diasEstados[$i]['DiasLimite'].'D'));
+                $result = array("EstadoProbable"=>$descripcion,"FechaLimite"=> $fechaFin->format('Y-m-d'));
+                $i++;
+            }else{
+                $i++;
+            }
+
+        }
+
+        if( $result["EstadoProbable"] == NULL && $result["FechaLimite"] == NULL){
+            $result["Error"] = "Estado no encontrado: ".$estado;
+        }
+
+        return $result;   
+    }
+
+
 
     function verificarExistencia($NumDemanda,$miConexion){
 
