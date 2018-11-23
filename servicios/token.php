@@ -10,7 +10,7 @@
         public function prepararToken($datos){
             $time = time();
             $this->jwt = array( 'iat' => $time, // Tiempo que inició el token
-                                'exp' => $time + (60*600), // Tiempo que expirará el token (+1 hora)
+                                'exp' => $time + (60*60), // Tiempo que expirará el token (+1 hora)
                                 'data' => $datos);
 
             if($this->jwt['data'] == NULL || $this->jwt == NULL){
