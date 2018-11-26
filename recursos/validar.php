@@ -3,25 +3,23 @@
     header("Access-Control-Allow-Headers:*");
     header("Access-Control-Allow-Methods: POST, GET, PUT");
   
-    $accion = NULL;
+    
 
     if($_SERVER['REQUEST_METHOD'] == "OPTIONS"){
 
     }else{
+        $accion = NULL;
+        $token = apache_request_headers();
+        $token = $token['Authorization'];
+
         if ($_SERVER['REQUEST_METHOD'] == "POST" || $_SERVER['REQUEST_METHOD'] == "PUT"){    
             $post_vars=file_get_contents("php://input"); // Extracción de datos
             $post_vars= json_decode($post_vars,true); // Descodificacion de json 
             
             if(isset($_GET['accion'])){
                 $accion = validarAccion($_GET['accion']);
-                $token = apache_request_headers();
-                $token = $token['Authorization'];
+
             }else{
-                if(!(isset($post_vars["token"])) ||  $post_vars["token"] == NULL || empty($post_vars["token"])){
-                    $token = NULL;
-                }else {
-                    $token = $post_vars["token"];
-                }
                 @$accion = validarAccion($post_vars["accion"]);
             }
 
@@ -30,13 +28,13 @@
         }elseif ($_SERVER['REQUEST_METHOD'] == "GET") {
 
             @$accion = validarAccion($_GET['accion']);
-            @acceder($accion,$_GET['token'],$_GET);
+            @acceder($accion,$token,$_GET);
     
         }elseif ($_SERVER['REQUEST_METHOD'] == "DELETE"){
             header("Access-Control-Allow-Methods: DELETE"); //Admicion para el metodo delete en especifico 
 
             @$accion = validarAccion($_GET['accion']);
-            @acceder($accion,$_GET['token'],$_GET);
+            @acceder($accion,$token,$_GET);
         }else {
             $respuesta->preparar(401,'Llamado por metodo erroneo');
             $respuesta->responder();
