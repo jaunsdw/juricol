@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 20-11-2018 a las 02:04:23
+-- Tiempo de generación: 23-11-2018 a las 06:38:43
 -- Versión del servidor: 10.1.33-MariaDB
 -- Versión de PHP: 7.2.6
 
@@ -94,7 +94,12 @@ INSERT INTO `clientes` (`Id`, `PrimerNombre`, `SegundoNombre`, `PrimerApellido`,
 (2, 'Juan', 'Diego', 'Moreno', 'Marroquin', 1234644360, NULL, 3138087186, 'Av siempre viva 25-36', 'faltron@misena.edu.co', '1999-05-24', '2018-09-14', NULL),
 (4, 'Carlos', 'Andres', 'Ramirez', 'Ramirez', 741852963, 4561233625, 32165658744, 'Calle 34 Numero 23 a', 'prueba2@gmail.com', '1989-05-14', '2018-10-16', NULL),
 (6, 'Carlos', 'Andres', 'Ramirez', 'Ramirez', 2147483647, 3213, 32165658744, 'Calle 34 Numero 23 a', 'prueba2@gmail.com', '1989-05-14', '2018-10-23', NULL),
-(9, 'Carlos', 'Andres', 'Ramirez', 'Ramirez', 741873, NULL, 32165658744, 'Calle 34 Numero 23 a', 'prueba2@gmail.com', '1989-05-14', '2018-10-23', '2018-10-24');
+(9, 'Carlos', 'Andres', 'Ramirez', 'Ramirez', 741873, NULL, 32165658744, 'Calle 34 Numero 23 a', 'prueba2@gmail.com', '1989-05-14', '2018-10-23', '2018-10-24'),
+(10, 'LUZ ', 'NIDIA ', 'LONDOÑO ', 'TAMAYO ', 1745963251, NULL, 318185957, 'qweert', 'werwer', '1986-11-20', '2018-11-20', NULL),
+(11, 'FERDINAN ', '', 'YATE ', 'CASTAÑO', 1478965, NULL, 122457, 'khjkhjk', 'hjkhjkhjk', '1975-08-08', '2018-11-20', NULL),
+(12, 'ANA ', 'SOFIA ', 'RAMOS ', 'ALVAREZ', 85274193, NULL, 786453, 'utyutyur', 'rurtyrtyrfg', '1990-08-01', '2018-11-20', NULL),
+(13, 'MARGARITA', '', 'LOZANO DE ', 'TORRES', 984651327, NULL, 3215545, 'erterterg', 'dfgdfgdrtet', '1974-02-05', '2018-11-22', NULL),
+(14, 'JORGE', '', ' ELIECER ', ' MARTINEZ ', 753654159, NULL, 987654, 'wertwertertwer', 'westertwertwert', '1977-11-11', '2018-11-22', NULL);
 
 -- --------------------------------------------------------
 
@@ -105,10 +110,11 @@ INSERT INTO `clientes` (`Id`, `PrimerNombre`, `SegundoNombre`, `PrimerApellido`,
 CREATE TABLE `demandas` (
   `Id` int(11) NOT NULL,
   `Clientes_id` int(11) NOT NULL,
-  `NumDemanda` bigint(25) NOT NULL,
+  `NumDemanda` varchar(50) NOT NULL,
   `TiposDemandas_id` int(11) NOT NULL,
   `Titular_id` int(11) NOT NULL,
   `Suplente_id` int(11) NOT NULL,
+  `Demandado` varchar(255) NOT NULL,
   `Descripcion` varchar(80) NOT NULL,
   `EstadosProcesos_id` int(11) NOT NULL,
   `Categoria` tinyint(1) NOT NULL,
@@ -119,9 +125,12 @@ CREATE TABLE `demandas` (
 -- Volcado de datos para la tabla `demandas`
 --
 
-INSERT INTO `demandas` (`Id`, `Clientes_id`, `NumDemanda`, `TiposDemandas_id`, `Titular_id`, `Suplente_id`, `Descripcion`, `EstadosProcesos_id`, `Categoria`, `FechaCreacion`) VALUES
-(2, 1, 7000256984521, 3, 3, 2, 'sdfsdfsdf', 1, 1, '2018-11-15'),
-(3, 2, 987654254785, 2, 2, 3, 'ewrwerwrwefff', 1, 0, '2018-11-15');
+INSERT INTO `demandas` (`Id`, `Clientes_id`, `NumDemanda`, `TiposDemandas_id`, `Titular_id`, `Suplente_id`, `Demandado`, `Descripcion`, `EstadosProcesos_id`, `Categoria`, `FechaCreacion`) VALUES
+(4, 10, '73001333300120160026900', 2, 3, 1, 'MUNICIPIO DE IBAGUE', 'serterdfg', 2, 1, '2018-11-20'),
+(5, 11, '73001333300120170040700', 1, 9, 5, 'LA NACION- MINISTERIO DE EDUCACION', 'gdfgdfbfbdfdgdfgd', 1, 1, '2018-11-20'),
+(6, 12, '73001333300120180005500', 2, 10, 1, 'NACION- MINISTERIO DE EDUCACION NACIONAL', 'dgdfgdfgdfgdfgdfg', 1, 1, '2018-11-20'),
+(7, 13, '73001333300120160003800', 2, 4, 8, 'UNIDAD DE GESTION PENSIONAL Y PARAFISCALES', 'sdfgsdfgsdfgdfgdfbbdfbdfbdfbdf', 1, 1, '2018-11-22'),
+(8, 14, '76001333301320130005700', 1, 10, 4, 'INSTITUTO NACIONAL PENITENCIARIO Y CARCELARIO', 'sdsdfwefwefwef', 2, 1, '2018-11-22');
 
 -- --------------------------------------------------------
 
@@ -158,7 +167,12 @@ INSERT INTO `empleados` (`Id`, `PrimerNombre`, `SegundoNombre`, `PrimerApellido`
 (2, 'Juan', 'Esteban ', 'Parra', 'Ducuara', 987654321, 3, 'Activo', '1999-05-18', 4, 1, 'qwqweqweqwe', 'qweqweqweqwe@hotmail.com', 3138185957, 235698, '2018-09-14', NULL),
 (3, 'Prueba2', 'prueba2', '', '', 159753, 1, 'Activo', '1999-05-24', 1, 1, 'prueba2', 'prueba2', 321654, 321654, '2018-10-03', NULL),
 (4, 'P', 'pr', 'p', 'pr', 333333333, 1, 'Activo', '1999-05-24', 1, 1, 'pr', 'pru', 321654, 321654, '2018-11-15', NULL),
-(5, 'Juricol', 'Juricol', 'Juricol', 'Juricol', 2147483647, 1, 'Activo', '1987-02-12', 1, 1, 'Calle 2 tres 23 ', 'juricol@hotmail.com', 3213654986, 20352147, '2018-11-15', NULL);
+(5, 'Juricol', 'Juricol', 'Juricol', 'Juricol', 2147483647, 1, 'Activo', '1987-02-12', 1, 1, 'Calle 2 tres 23 ', 'juricol@hotmail.com', 3213654986, 20352147, '2018-11-15', NULL),
+(8, 'Juricol', 'Juricol', 'Juricol', 'Juricol', 787545, 1, 'Activo', '1987-02-12', 1, 1, 'Calle 2 tres 23 ', 'juricol@hotmail.com', 3213654986, 20352147, '2018-11-19', NULL),
+(9, 'Juricol', 'Juricol', 'Juricol', 'Juricol', 71151196, 1, 'Activo', '1987-02-12', 1, 1, 'Calle 2 tres 23 ', 'juricol@hotmail.com', 3213654986, 20352147, '2018-11-19', NULL),
+(10, 'Juricol', 'Juricol', 'Juricol', 'Juricol', 1234644310, 1, 'Activo', '1987-02-12', 1, 1, 'Calle 2 tres 23 ', 'juricol@hotmail.com', 3213654986, 20352147, '2018-11-19', NULL),
+(11, 'Juricol', 'Juricol', 'Juricol', 'Juricol', 87563214, 1, 'Activo', '1987-02-12', 1, 1, 'Calle 2 tres 23 ', 'juricol@hotmail.com', 3213654986, 20352147, '2018-11-20', NULL),
+(12, 'Juricol', 'Juricol', 'Juricol', 'Juricol', 87, 1, 'Activo', '1987-02-12', 1, 1, 'Calle 2 tres 23 ', 'juricol@hotmail.com', 3213654986, 20352147, '2018-11-20', NULL);
 
 -- --------------------------------------------------------
 
@@ -192,18 +206,27 @@ INSERT INTO `especialidades` (`Id`, `Descripcion`, `FechaCreacion`) VALUES
 CREATE TABLE `estadosdemandas` (
   `Id` int(11) NOT NULL,
   `Descripcion` varchar(50) NOT NULL,
-  `FechaCreacion` date NOT NULL
+  `FechaCreacion` date NOT NULL,
+  `DiasLimite` smallint(6) NOT NULL,
+  `Tipo` enum('Fase','EstadoElectronico') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `estadosdemandas`
 --
 
-INSERT INTO `estadosdemandas` (`Id`, `Descripcion`, `FechaCreacion`) VALUES
-(1, 'Al despacho', '2018-11-13'),
-(2, 'En proceso ', '2018-11-13'),
-(3, 'En jurisdiccion ', '2018-11-13'),
-(4, 'Aprovaca conciliacion ', '2018-11-13');
+INSERT INTO `estadosdemandas` (`Id`, `Descripcion`, `FechaCreacion`, `DiasLimite`, `Tipo`) VALUES
+(5, 'Agotamiento', '2018-11-20', 90, 'Fase'),
+(6, 'Procuraduria', '2018-11-20', 120, 'Fase'),
+(7, 'Aprueba Costas', '2018-11-20', 3, 'EstadoElectronico'),
+(8, 'Auto obedézcase y cúmplase', '2018-11-20', 8, 'EstadoElectronico'),
+(9, 'Inadmite Demanda', '2018-11-20', 15, 'EstadoElectronico'),
+(10, 'Rechaza Demanda', '2018-11-20', 3, 'EstadoElectronico'),
+(11, 'Admite Demanda', '2018-11-20', 15, 'EstadoElectronico'),
+(12, 'Auto Resuelve Reposición', '2018-11-20', 20, 'EstadoElectronico'),
+(13, 'Auto reconoce personería', '2018-11-20', 6, 'EstadoElectronico'),
+(14, 'Auto ordena oficiar', '2018-11-20', 8, 'EstadoElectronico'),
+(15, 'Auto fija fecha audiencia y/o diligencia', '2018-11-22', 54, 'EstadoElectronico');
 
 -- --------------------------------------------------------
 
@@ -234,7 +257,7 @@ INSERT INTO `estadosprocesos` (`Id`, `Descripcion`, `FechaCreacion`) VALUES
 CREATE TABLE `movimientos` (
   `Id` int(11) NOT NULL,
   `Demandas_id` int(11) NOT NULL,
-  `EstadosDemandas` int(11) NOT NULL,
+  `EstadosDemandas_id` int(11) NOT NULL,
   `FechaMovimiento` date NOT NULL,
   `Descripcion` text NOT NULL,
   `FechaLimite` date NOT NULL
@@ -294,7 +317,7 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`Id`, `Usuario`, `Password`, `Empleados_id`, `FechaCreacion`, `CodigoAsociado`) VALUES
-(1, 123456789, '123456789', 1, '2018-09-12', NULL);
+(1, 123456789, '987654321', 1, '2018-09-12', NULL);
 
 --
 -- Índices para tablas volcadas
@@ -326,7 +349,7 @@ ALTER TABLE `clientes`
 --
 ALTER TABLE `demandas`
   ADD PRIMARY KEY (`Id`),
-  ADD KEY `NumDemanda` (`NumDemanda`),
+  ADD UNIQUE KEY `NumDemanda_2` (`NumDemanda`),
   ADD KEY `demandas_ibfk_3` (`TiposDemandas_id`),
   ADD KEY `demandas_ibfk_4` (`Titular_id`),
   ADD KEY `demandas_ibfk_5` (`Suplente_id`),
@@ -368,7 +391,7 @@ ALTER TABLE `estadosprocesos`
 ALTER TABLE `movimientos`
   ADD PRIMARY KEY (`Id`),
   ADD KEY `movimientos_ibfk_1` (`Demandas_id`),
-  ADD KEY `movimientos_ibfk_2` (`EstadosDemandas`);
+  ADD KEY `movimientos_ibfk_2` (`EstadosDemandas_id`);
 
 --
 -- Indices de la tabla `semaforo`
@@ -411,19 +434,19 @@ ALTER TABLE `cargos`
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `demandas`
 --
 ALTER TABLE `demandas`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `empleados`
 --
 ALTER TABLE `empleados`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `especialidades`
@@ -435,7 +458,7 @@ ALTER TABLE `especialidades`
 -- AUTO_INCREMENT de la tabla `estadosdemandas`
 --
 ALTER TABLE `estadosdemandas`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `estadosprocesos`
@@ -499,7 +522,7 @@ ALTER TABLE `empleados`
 --
 ALTER TABLE `movimientos`
   ADD CONSTRAINT `movimientos_ibfk_1` FOREIGN KEY (`Demandas_id`) REFERENCES `demandas` (`Id`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `movimientos_ibfk_2` FOREIGN KEY (`EstadosDemandas`) REFERENCES `estadosdemandas` (`Id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+  ADD CONSTRAINT `movimientos_ibfk_2` FOREIGN KEY (`EstadosDemandas_id`) REFERENCES `estadosdemandas` (`Id`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `usuarios`
