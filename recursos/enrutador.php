@@ -30,6 +30,9 @@
                     case 'consultarDemandas':
                         require_once("demandas/consultarDemandas.php");
                         break;
+                    case 'consultarTipoDocumento':
+                        require_once("tiposDocumentos/consultarTipoDoc.php");
+                        break;
                     default:
                         $respuesta->preparar(404, "Accion no existe");
                         $respuesta->responder();
@@ -63,6 +66,9 @@
                     case 'crearUsuario';
                         require_once("usuarios/crearUsuario.php");
                         break;
+                    case 'crearTipoDocumento':
+                        require_once("tiposdocumentos/crearTipoDoc.php");
+                        break;
                     default:
                         $respuesta->preparar(404, "Accion no existe");
                         $respuesta->responder();
@@ -82,6 +88,9 @@
                         break;
                     case 'modificarCliente':
                         require_once("clientes/actualizarCliente.php");
+                        break;
+                    case 'modificarTipoDocumento':
+                        require_once("tiposdocumentos/modificarTipoDocumento.php");
                         break;
                     default:
                         $respuesta->preparar(404, "Accion no existe");
