@@ -74,6 +74,7 @@
                     "Demandante"=>$demandas[$i]['Demandante'],
                     "Demandado"=>$demandas[$i]['Demandado'],
                     "Titular"=>$juricol[0]['Titular'],
+                    "IdNuevoEstado"=> $result['IdEstado'],
                     "NuevoEstado"=>$demandas[$i]['NuevoEstado'],
                     "FechaCambio"=>$fechaInicio->format('Y-m-d'),
                     "FechaLimite"=>$result['FechaLimite'],
@@ -100,7 +101,9 @@
 
     function  consultarEstados($miConexion){
         
-        $sql="SELECT    Descripcion,
+        $sql="SELECT   
+                        Id,
+                        Descripcion,
                         DiasLimite 
                     FROM estadosDemandas";
 
@@ -120,7 +123,7 @@
 
     function calcularFechaLimite($fechaInicio,$estado,$miConexion,$diasEstados){
         
-        $result = array("EstadoProbable"=>NULL,"FechaLimite"=>NULL,"Error"=>NULL);
+        $result = array("EstadoProbable"=>NULL,"FechaLimite"=>NULL,"Error"=>NULL,"IdEstado"=>NULL);
 
         $fechaFin = new DateTime($fechaInicio);
 
@@ -135,11 +138,12 @@
                 
                 $fechaFin->add(new DateInterval('P'.$diasEstados[$i]['DiasLimite'].'D'));
                 $result["FechaLimite"] = $fechaFin->format('Y-m-d');
+                $result["IdEstado"] = $diasEstados[$i]['Id'];
                 $i++;
 
             }elseif($porcentaje >= 93){
                 $fechaFin->add(new DateInterval('P'.$diasEstados[$i]['DiasLimite'].'D'));
-                $result = array("EstadoProbable"=>$descripcion,"FechaLimite"=> $fechaFin->format('Y-m-d'));
+                $result = array("EstadoProbable"=>$descripcion,"FechaLimite"=> $fechaFin->format('Y-m-d'),"IdEstado"=>$diasEstados[$i]['Id']);
                 $i++;
             }else{
                 $i++;
