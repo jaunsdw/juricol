@@ -30,7 +30,7 @@
                     case 'consultarDemandas':
                         require_once("demandas/consultarDemandas.php");
                         break;
-                    case 'consultarTipoDocumento':
+                    case 'consultarTiposDocumentos':
                         require_once("tiposDocumentos/consultarTipoDoc.php");
                         break;
                     case 'consultarParentescos':
@@ -45,7 +45,7 @@
                     case 'consultarCiudades':
                         require_once("ciudades/consultarCiudades.php");
                         break;
-                    case 'consultarInstitucionLaboral':
+                    case 'consultarInstitucionesLaborales':
                         require_once("institucionlaboral/consultarInstitucionLaboral.php");
                         break;
                     case 'consultarJuzgados':
@@ -63,22 +63,22 @@
             break;
             case 'POST':
                 switch ($accion) {
-                    case 'crearClientes':
+                    case 'crearCliente':
                         require_once("clientes/crearClientes.php");
                         break;
-                    case 'crearCargos':
+                    case 'crearCargo':
                         require_once("cargos/crearCargos.php");
                         break;
-                    case 'crearEstadosEmpleados':
+                    case 'crearEstadoEmpleado':
                         require_once("estadosempleados/crearEstados.php");
                         break;
-                    case 'crearEmpleados';
+                    case 'crearEmpleado';
                         require_once("empleados/crearEmpleados.php");
                         break;
-                    case 'crearTiposDemandas';
+                    case 'crearTipoDemanda';
                         require_once("tiposdemandas/crearTipos.php");
                         break;
-                    case 'crearEstadosProcesos';
+                    case 'crearEstadoProceso';
                         require_once("estadosprocesos/crearEstados.php");
                         break;
                     case 'pdf';
@@ -105,7 +105,7 @@
                     case 'crearInstitucionLaboral':
                         require_once("institucionlaboral/crearInstitucionLaboral.php");
                         break;
-                    case 'crearEspecialidades':
+                    case 'crearEspecialidad':
                         require_once("especialidades/crearEspecialidades.php");
                         break;
                     case 'crearJuzgado':
@@ -152,16 +152,16 @@
                     case 'modificarInstitucionLaboral':
                         require_once("institucionlaboral/modificarInstitucionLaboral.php");
                         break;
-                    case 'modificarEspecialidades':
+                    case 'modificarEspecialidad':
                         require_once("especialidades/modificarEspecialidades.php");
                         break;
-                    case 'modificarCargos':
+                    case 'modificarCargo':
                         require_once("cargos/modificarCargos.php");
                         break;
-                    case 'modificarTiposDemandas':
+                    case 'modificarTipoDemanda':
                         require_once("tiposdemandas/modificarTipos.php");
                         break;
-                    case 'modificarEstadosProcesos':
+                    case 'modificarEstadoProceso':
                         require_once("estadosprocesos/modificarEstados.php");
                         break;
                     case 'modificarJuzgado':
@@ -178,10 +178,10 @@
             break;
             case 'DELETE':
                 switch ($accion) {
-                    case 'eliminarClientes':
+                    case 'eliminarCliente':
                         require_once("clientes/eliminarCliente.php");
                         break;
-                    case 'eliminarEmpleados':
+                    case 'eliminarEmpleado':
                         require_once("empleados/eliminarEmpleado");
                         break;
                     default:
