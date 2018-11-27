@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-11-2018 a las 14:21:22
+-- Tiempo de generación: 27-11-2018 a las 20:12:26
 -- Versión del servidor: 10.1.33-MariaDB
 -- Versión de PHP: 7.2.6
 
@@ -92,7 +92,7 @@ CREATE TABLE `clientes` (
   `SegundoNombre` varchar(20) NOT NULL,
   `PrimerApellido` varchar(20) NOT NULL,
   `SegundoApellido` varchar(20) NOT NULL,
-  `Documento` int(11) NOT NULL,
+  `Documento` bigint(15) NOT NULL,
   `Telefono` bigint(15) DEFAULT NULL,
   `Celular` bigint(15) NOT NULL,
   `Direccion` varchar(50) NOT NULL,
@@ -104,11 +104,19 @@ CREATE TABLE `clientes` (
   `CiudadResidencia_id` int(11) NOT NULL,
   `InstitucionLaboral_id` int(11) NOT NULL,
   `NombreSustituto` varchar(60) NOT NULL,
-  `TelefonoCelularSustituto` bigint(15) NOT NULL,
+  `CelularSustituto` bigint(15) NOT NULL,
   `CorreoSustituto` varchar(100) NOT NULL,
+  `TipoDocumentoSustituto_id` int(11) NOT NULL,
   `DocumentoSustituto` bigint(15) NOT NULL,
   `Parentesco_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `clientes`
+--
+
+INSERT INTO `clientes` (`Id`, `PrimerNombre`, `SegundoNombre`, `PrimerApellido`, `SegundoApellido`, `Documento`, `Telefono`, `Celular`, `Direccion`, `Correo`, `FechaNacimiento`, `FechaCreacion`, `FechaInhabilitacion`, `TipoDocumento_id`, `CiudadResidencia_id`, `InstitucionLaboral_id`, `NombreSustituto`, `CelularSustituto`, `CorreoSustituto`, `TipoDocumentoSustituto_id`, `DocumentoSustituto`, `Parentesco_id`) VALUES
+(2, 'LUZ', 'NIDIA', 'LONDOÃ‘O', 'TAMAYO', 11105232021, 3122546, 235465777, 'Av siempre viva', 'Yo@gmail.com', '1988-05-05', '2018-11-27', NULL, 1, 1, 1, 'Maria Paula MariÃ±o', 3216546844, 'yo@gmail.com', 1, 2156546874, 3);
 
 -- --------------------------------------------------------
 
@@ -121,6 +129,7 @@ CREATE TABLE `demandas` (
   `Clientes_id` int(11) NOT NULL,
   `NumDemanda` varchar(50) NOT NULL,
   `TiposDemandas_id` int(11) NOT NULL,
+  `TiposProcesos_id` int(11) NOT NULL,
   `Juzgado_id` int(11) NOT NULL,
   `Titular_id` int(11) NOT NULL,
   `Suplente_id` int(11) NOT NULL,
@@ -228,6 +237,15 @@ CREATE TABLE `estadosprocesos` (
   `FechaCreacion` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `estadosprocesos`
+--
+
+INSERT INTO `estadosprocesos` (`Id`, `Descripcion`, `FechaCreacion`) VALUES
+(1, 'Admitida', '2018-11-27'),
+(2, 'Rechazada', '2018-11-27'),
+(3, 'Inactivaa', '2018-11-27');
+
 -- --------------------------------------------------------
 
 --
@@ -259,6 +277,15 @@ CREATE TABLE `juzgados` (
   `Id` int(11) NOT NULL,
   `Descripcion` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `juzgados`
+--
+
+INSERT INTO `juzgados` (`Id`, `Descripcion`) VALUES
+(1, '01 administrativo de ibague'),
+(2, '02 administrativo de ibague'),
+(3, '07 administrativo de ibague');
 
 -- --------------------------------------------------------
 
@@ -317,6 +344,27 @@ INSERT INTO `parentesco` (`Id`, `Descripcion`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `tipoprocesos`
+--
+
+CREATE TABLE `tipoprocesos` (
+  `Id` int(11) NOT NULL,
+  `Descripcion` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `tipoprocesos`
+--
+
+INSERT INTO `tipoprocesos` (`Id`, `Descripcion`) VALUES
+(3, 'Ejecutivo'),
+(4, 'Ejecutivo prima de servicioss'),
+(1, 'Homologacion'),
+(2, 'Sancion cesantias parciales');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `tiposdemandas`
 --
 
@@ -325,6 +373,16 @@ CREATE TABLE `tiposdemandas` (
   `Descripcion` varchar(30) NOT NULL,
   `FechaCreacion` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `tiposdemandas`
+--
+
+INSERT INTO `tiposdemandas` (`Id`, `Descripcion`, `FechaCreacion`) VALUES
+(2, 'Civil', '2018-11-27'),
+(3, 'Penal', '2018-11-27'),
+(4, 'Administrativa', '2018-11-27'),
+(5, 'Judicialll', '2018-11-27');
 
 -- --------------------------------------------------------
 
@@ -362,6 +420,13 @@ CREATE TABLE `usuarios` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`Id`, `Usuario`, `Password`, `Empleados_id`, `FechaCreacion`, `CodigoAsociado`) VALUES
+(1, 123456789, '123456789', NULL, '2018-11-27', NULL);
+
+--
 -- Índices para tablas volcadas
 --
 
@@ -395,7 +460,8 @@ ALTER TABLE `clientes`
   ADD KEY `Parentesco_id` (`Parentesco_id`),
   ADD KEY `CiudadResidencia_id` (`CiudadResidencia_id`),
   ADD KEY `InstitucionLaboral_id` (`InstitucionLaboral_id`),
-  ADD KEY `TipoDocumento_id` (`TipoDocumento_id`);
+  ADD KEY `TipoDocumento_id` (`TipoDocumento_id`),
+  ADD KEY `TipoDocumentoSustituto_id` (`TipoDocumentoSustituto_id`);
 
 --
 -- Indices de la tabla `demandas`
@@ -407,7 +473,8 @@ ALTER TABLE `demandas`
   ADD KEY `demandas_ibfk_5` (`Suplente_id`),
   ADD KEY `demandas_ibfk_7` (`EstadosProcesos_id`),
   ADD KEY `demandas_ibfk_8` (`Clientes_id`),
-  ADD KEY `Juzgado_id` (`Juzgado_id`);
+  ADD KEY `demandas_ibfk_9` (`Juzgado_id`),
+  ADD KEY `TiposProcesos_id` (`TiposProcesos_id`);
 
 --
 -- Indices de la tabla `departamentos`
@@ -481,6 +548,13 @@ ALTER TABLE `parentesco`
   ADD UNIQUE KEY `Descripcion` (`Descripcion`);
 
 --
+-- Indices de la tabla `tipoprocesos`
+--
+ALTER TABLE `tipoprocesos`
+  ADD PRIMARY KEY (`Id`),
+  ADD UNIQUE KEY `Descripcion` (`Descripcion`);
+
+--
 -- Indices de la tabla `tiposdemandas`
 --
 ALTER TABLE `tiposdemandas`
@@ -528,7 +602,7 @@ ALTER TABLE `ciudades`
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `demandas`
@@ -564,7 +638,7 @@ ALTER TABLE `estadosdemandas`
 -- AUTO_INCREMENT de la tabla `estadosprocesos`
 --
 ALTER TABLE `estadosprocesos`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `institucionlaboral`
@@ -576,7 +650,7 @@ ALTER TABLE `institucionlaboral`
 -- AUTO_INCREMENT de la tabla `juzgados`
 --
 ALTER TABLE `juzgados`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `movimientos`
@@ -597,10 +671,16 @@ ALTER TABLE `parentesco`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT de la tabla `tipoprocesos`
+--
+ALTER TABLE `tipoprocesos`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT de la tabla `tiposdemandas`
 --
 ALTER TABLE `tiposdemandas`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `tiposdocumentos`
@@ -612,7 +692,7 @@ ALTER TABLE `tiposdocumentos`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Restricciones para tablas volcadas
@@ -637,18 +717,20 @@ ALTER TABLE `clientes`
   ADD CONSTRAINT `clientes_ibfk_1` FOREIGN KEY (`Parentesco_id`) REFERENCES `parentesco` (`Id`) ON DELETE NO ACTION ON UPDATE CASCADE,
   ADD CONSTRAINT `clientes_ibfk_2` FOREIGN KEY (`CiudadResidencia_id`) REFERENCES `ciudades` (`Id`) ON DELETE NO ACTION ON UPDATE CASCADE,
   ADD CONSTRAINT `clientes_ibfk_3` FOREIGN KEY (`InstitucionLaboral_id`) REFERENCES `institucionlaboral` (`Id`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `clientes_ibfk_4` FOREIGN KEY (`TipoDocumento_id`) REFERENCES `tiposdocumentos` (`Id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+  ADD CONSTRAINT `clientes_ibfk_4` FOREIGN KEY (`TipoDocumento_id`) REFERENCES `tiposdocumentos` (`Id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `clientes_ibfk_5` FOREIGN KEY (`TipoDocumentoSustituto_id`) REFERENCES `tiposdocumentos` (`Id`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `demandas`
 --
 ALTER TABLE `demandas`
+  ADD CONSTRAINT `demandas_ibfk_10` FOREIGN KEY (`TiposProcesos_id`) REFERENCES `tipoprocesos` (`Id`) ON DELETE NO ACTION ON UPDATE CASCADE,
   ADD CONSTRAINT `demandas_ibfk_3` FOREIGN KEY (`TiposDemandas_id`) REFERENCES `tiposdemandas` (`Id`) ON DELETE NO ACTION ON UPDATE CASCADE,
   ADD CONSTRAINT `demandas_ibfk_4` FOREIGN KEY (`Titular_id`) REFERENCES `empleados` (`Id`) ON DELETE NO ACTION ON UPDATE CASCADE,
   ADD CONSTRAINT `demandas_ibfk_5` FOREIGN KEY (`Suplente_id`) REFERENCES `empleados` (`Id`) ON DELETE NO ACTION ON UPDATE CASCADE,
   ADD CONSTRAINT `demandas_ibfk_7` FOREIGN KEY (`EstadosProcesos_id`) REFERENCES `estadosprocesos` (`Id`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `demandas_ibfk_8` FOREIGN KEY (`Clientes_id`) REFERENCES `clientes` (`Id`),
-  ADD CONSTRAINT `demandas_ibfk_9` FOREIGN KEY (`Juzgado_id`) REFERENCES `juzgados` (`Id`);
+  ADD CONSTRAINT `demandas_ibfk_8` FOREIGN KEY (`Clientes_id`) REFERENCES `clientes` (`Id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `demandas_ibfk_9` FOREIGN KEY (`Juzgado_id`) REFERENCES `juzgados` (`Id`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `departamentos`

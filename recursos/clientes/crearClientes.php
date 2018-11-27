@@ -23,7 +23,7 @@ if ($miConexion->GetCodigoRespuesta() == 503 ){
                                                 Correo,
                                                 FechaNacimiento,
                                                 NombreSustituto,
-                                                TelefonoCelularSustituto,
+                                                CelularSustituto,
                                                 CorreoSustituto,
                                                 TipoDocumentoSustituto_id,
                                                 DocumentoSustituto,
