@@ -10,15 +10,25 @@
             }else{
         
                 $SQL = "UPDATE clientes  
-                                SET PrimerNombre = '$PrimerNombre',
+                            SET     PrimerNombre = '$PrimerNombre',
                                     SegundoNombre = '$SegundoNombre',
                                     PrimerApellido = '$PrimerApellido',
                                     SegundoApellido = '$SegundoApellido',
-                                    Documento = $Documento,
-                                    Telefono = $Telefono,
+                                    TipoDocumento_id = $IdTipoDocumento,
+                                    Documento =  $Documento,
+                                    CiudadResidencia_id = $IdCiudad,
+                                    InstitucionLaboral_id = $IdInstitucionLaboral,
+                                    Telefono = $telefono,
                                     Celular = $Celular,
                                     Direccion = '$Direccion',
-                                    FechaNacimiento = '$FechaNacimiento'
+                                    Correo = '$Correo',
+                                    FechaNacimiento = '$FechaNacimiento',
+                                    NombreSustituto = '$NombreSustituto',
+                                    CelularSustituto = $CelularSustituto,
+                                    CorreoSustituto = '$CorreoSustituto',
+                                    TipoDocumentoSustituto_id = $IdTipoDocumentoSustituto,
+                                    DocumentoSustituto = $DocumentoSustituto,
+                                    Parentesco_id = $IdParentesco
                             WHERE Id = $IdCliente";    
 
                 $miConexion->EjecutarSQL($SQL); 
