@@ -12,6 +12,10 @@
         $token = apache_request_headers();
         $token = $token['Authorization'];
 
+        if(!(isset($token)) || $token == NULL || empty($token)){
+            $token = NULL;
+        }
+
         if ($_SERVER['REQUEST_METHOD'] == "POST" || $_SERVER['REQUEST_METHOD'] == "PUT"){    
             $post_vars=file_get_contents("php://input"); // Extracción de datos
             $post_vars= json_decode($post_vars,true); // Descodificacion de json 

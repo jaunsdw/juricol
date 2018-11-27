@@ -33,6 +33,18 @@
                     case 'consultarTipoDocumento':
                         require_once("tiposDocumentos/consultarTipoDoc.php");
                         break;
+                    case 'consultarParentescos':
+                        require_once("parentesco/consultarParentescos.php");
+                        break;
+                    case 'consultarPaises':
+                        require_once("paises/consultarPaises.php");
+                        break;
+                    case 'consultarDepartamentos':
+                        require_once("departamentos/consultarDepartamentos.php");
+                        break;
+                    case 'consultarCiudades':
+                        require_once("ciudades/consultarCiudades.php");
+                        break;
                     default:
                         $respuesta->preparar(404, "Accion no existe");
                         $respuesta->responder();
@@ -69,6 +81,18 @@
                     case 'crearTipoDocumento':
                         require_once("tiposdocumentos/crearTipoDoc.php");
                         break;
+                    case 'crearParentesco':
+                        require_once("parentesco/crearParentesco.php");
+                        break;
+                    case 'crearPais':
+                        require_once("paises/crearPais.php");
+                        break;
+                    case 'crearDepartamento':
+                        require_once("departamentos/crearDepartamento.php");
+                        break;
+                    case 'crearCiudad':
+                        require_once("ciudades/crearCiudad.php");
+                        break;
                     default:
                         $respuesta->preparar(404, "Accion no existe");
                         $respuesta->responder();
@@ -91,6 +115,18 @@
                         break;
                     case 'modificarTipoDocumento':
                         require_once("tiposdocumentos/modificarTipoDocumento.php");
+                        break;
+                    case 'modificarParentesco':
+                        require_once("parentesco/modificarParentesco.php");
+                        break;
+                    case 'modificarPais':
+                        require_once("paises/modificarPais.php");
+                        break;
+                    case 'modificarDepartamento':
+                        require_once("departamentos/modificarDepartamento.php");
+                        break;
+                    case 'modificarCiudad':
+                        require_once("ciudades/modificarCiudad.php");
                         break;
                     default:
                         $respuesta->preparar(404, "Accion no existe");
