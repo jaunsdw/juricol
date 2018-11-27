@@ -6,7 +6,7 @@ if ($miConexion->GetCodigoRespuesta() == 503 ){
     }else{
 
         if(!(isset($telefono)) || empty($telefono) ){
-            $telefono = NULL
+            $telefono = NULL;
         }
 
                     $sql="INSERT INTO clientes (PrimerNombre,
