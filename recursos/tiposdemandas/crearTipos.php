@@ -6,7 +6,7 @@
 
         $sql="INSERT INTO tiposdemandas (Descripcion,
                                     FechaCreacion)
-                            VALUES ('$tipoNuevo',
+                            VALUES ('$tipoDemandaNueva',
                                     NOW())";
 
         $miConexion->EjecutarSQL($sql);

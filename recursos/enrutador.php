@@ -48,6 +48,12 @@
                     case 'consultarInstitucionLaboral':
                         require_once("institucionlaboral/consultarInstitucionLaboral.php");
                         break;
+                    case 'consultarJuzgados':
+                        require_once("juzgados/consultarJuazgados.php");
+                        break;
+                    case 'consultarTiposProcesos':
+                        require_once("tiposprocesos/consultarTiposProcesos.php");
+                        break;
                     default:
                         $respuesta->preparar(404, "Accion no existe");
                         $respuesta->responder();
@@ -102,6 +108,12 @@
                     case 'crearEspecialidades':
                         require_once("especialidades/crearEspecialidades.php");
                         break;
+                    case 'crearJuzgado':
+                        require_once("juzgados/crearJuzgado.php");
+                        break;
+                    case 'crearTipoProceso':
+                        require_once("tiposprocesos/crearTipoProceso.php");
+                        break;
                     default:
                         $respuesta->preparar(404, "Accion no existe");
                         $respuesta->responder();
@@ -145,6 +157,18 @@
                         break;
                     case 'modificarCargos':
                         require_once("cargos/modificarCargos.php");
+                        break;
+                    case 'modificarTiposDemandas':
+                        require_once("tiposdemandas/modificarTipos.php");
+                        break;
+                    case 'modificarEstadosProcesos':
+                        require_once("estadosprocesos/modificarEstados.php");
+                        break;
+                    case 'modificarJuzgado':
+                        require_once("juzgados/modificarJuzgado.php");
+                        break;
+                    case 'modificarTipoProceso':
+                        require_once("tiposprocesos/modificarTipoProceso.php");
                         break;
                     default:
                         $respuesta->preparar(404, "Accion no existe");

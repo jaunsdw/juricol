@@ -10,10 +10,12 @@
     }else{
         $accion = NULL;
         $token = apache_request_headers();
-        $token = $token['Authorization'];
+         
 
-        if(!(isset($token)) || $token == NULL || empty($token)){
+        if(!(isset($token['Authorization'])) || $token['Authorization'] == NULL || empty($token['Authorization'])){
             $token = NULL;
+        }else {
+            $token = $token['Authorization'];
         }
 
         if ($_SERVER['REQUEST_METHOD'] == "POST" || $_SERVER['REQUEST_METHOD'] == "PUT"){    

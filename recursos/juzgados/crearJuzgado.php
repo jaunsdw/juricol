@@ -4,10 +4,8 @@
         $respuesta->preparar(503,"Servicio No disponible BD");
     }else{
 
-        $sql="INSERT INTO estadosprocesos (Descripcion,
-                                    FechaCreacion)
-                            VALUES ('$estadoProcesoNuevo',
-                                    NOW())";
+        $sql="INSERT INTO juzgados (Descripcion)
+                            VALUES ('$juzgadoNuevo')";
 
         $miConexion->EjecutarSQL($sql);
         
