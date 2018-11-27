@@ -99,6 +99,9 @@
                     case 'crearInstitucionLaboral':
                         require_once("institucionlaboral/crearInstitucionLaboral.php");
                         break;
+                    case 'crearEspecialidades':
+                        require_once("especialidades/crearEspecialidades.php");
+                        break;
                     default:
                         $respuesta->preparar(404, "Accion no existe");
                         $respuesta->responder();
@@ -136,6 +139,12 @@
                         break;
                     case 'modificarInstitucionLaboral':
                         require_once("institucionlaboral/modificarInstitucionLaboral.php");
+                        break;
+                    case 'modificarEspecialidades':
+                        require_once("especialidades/modificarEspecialidades.php");
+                        break;
+                    case 'modificarCargos':
+                        require_once("cargos/modificarCargos.php");
                         break;
                     default:
                         $respuesta->preparar(404, "Accion no existe");

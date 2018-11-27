@@ -4,7 +4,8 @@
         $respuesta->preparar(503,"Servicio No disponible BD");
     }else{
 
-        $sql="SELECT * FROM estadosempleados ";
+        $sql="INSERT INTO especialidades (Descripcion, FechaCreacion)
+                            VALUES ('$especialidadNueva', NOW() )";
 
         $miConexion->EjecutarSQL($sql);
         
@@ -13,8 +14,8 @@
             $respuesta->preparar(400, "Error al consultar ($sql)".$error);
         }else{
 
-            $resultado = $miConexion->GetResultados();
-            $respuesta->preparar(200, $resultado);
+            $resultado = $miConexion->ConsultarIdInsertado();
+            $respuesta->preparar(200,"Id insertado ".$resultado);
  
         }
     }
