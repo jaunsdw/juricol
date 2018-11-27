@@ -4,62 +4,47 @@
 if ($miConexion->GetCodigoRespuesta() == 503 ){
         $respuesta->preparar(503,"Servicio No disponible BD");
     }else{
-        
-  
-            if(!(isset($Telefono)) || empty($Telefono) || $Telefono == " "){
-
                     $sql="INSERT INTO clientes (PrimerNombre,
-                                        SegundoNombre,
-                                        PrimerApellido,
-                                        SegundoApellido,
-                                        Documento,
-                                        Telefono,
-                                        Celular,
-                                        Direccion,
-                                        Correo,
-                                        FechaNacimiento,
-                                        FechaCreacion,
-                                        FechaInhabilitacion)
+                                                SegundoNombre,
+                                                PrimerApellido,
+                                                SegundoApellido,
+                                                TipoDocumento_id,
+                                                Documento,
+                                                CiudadResidencia_id,
+                                                InstitucionLaboral_id,
+                                                Telefono,
+                                                Celular,
+                                                Direccion,
+                                                Correo,
+                                                FechaNacimiento,
+                                                NombreSustituto,
+                                                TelefonoCelularSustituto,
+                                                CorreoSustituto,
+                                                TipoDocumentoSustituto_id,
+                                                DocumentoSustituto,
+                                                Parentesco_id,
+                                                FechaCreacion,
+                                                FechaInhabilitacion)
                             VALUES ('$PrimerNombre',
                                     '$SegundoNombre',
                                     '$PrimerApellido',
                                     '$SegundoApellido',
+                                    $IdTipoDocumento,
                                     $Documento,
-                                    NULL,
+                                    $IdCiudad,
+                                    $IdInstitucionLaboral,
+                                    $telefono,
                                     $Celular,
                                     '$Direccion',
                                     '$Correo',
                                     '$FechaNacimiento',
+                                    '$NombreSustituto',
+                                    $TelefonoCelularSustituto,
+                                    '$CorreoSustituto',
+                                    $IdParentesco,
                                     NOW(),
                                     NULL )";
-            }else{
-                $sql="INSERT INTO clientes (PrimerNombre,
-                                    SegundoNombre,
-                                    PrimerApellido,
-                                    SegundoApellido,
-                                    Documento,
-                                    Telefono,
-                                    Celular,
-                                    Direccion,
-                                    Correo,
-                                    FechaNacimiento,
-                                    FechaCreacion,
-                                    FechaInhabilitacion)
-                        VALUES ('$PrimerNombre',
-                                '$SegundoNombre',
-                                '$PrimerApellido',
-                                '$SegundoApellido',
-                                $Documento,
-                                $Telefono,
-                                $Celular,
-                                '$Direccion',
-                                '$Correo',
-                                '$FechaNacimiento',
-                                NOW(),
-                                NULL )";
-            }
-    
-
+        
         $miConexion->EjecutarSQL($sql);
         
         if ($miConexion->GetCodigoRespuesta() == 400){
