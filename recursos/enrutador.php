@@ -49,7 +49,7 @@
                         require_once("institucionlaboral/consultarInstitucionLaboral.php");
                         break;
                     case 'consultarJuzgados':
-                        require_once("juzgados/consultarJuazgados.php");
+                        require_once("juzgados/consultarJuzgados.php");
                         break;
                     case 'consultarTiposProcesos':
                         require_once("tiposprocesos/consultarTiposProcesos.php");
