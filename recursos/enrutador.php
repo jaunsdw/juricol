@@ -45,6 +45,9 @@
                     case 'consultarCiudades':
                         require_once("ciudades/consultarCiudades.php");
                         break;
+                    case 'consultarInstitucionLaboral':
+                        require_once("institucionlaboral/consultarInstitucionLaboral.php");
+                        break;
                     default:
                         $respuesta->preparar(404, "Accion no existe");
                         $respuesta->responder();
@@ -93,6 +96,9 @@
                     case 'crearCiudad':
                         require_once("ciudades/crearCiudad.php");
                         break;
+                    case 'crearInstitucionLaboral':
+                        require_once("institucionlaboral/crearInstitucionLaboral.php");
+                        break;
                     default:
                         $respuesta->preparar(404, "Accion no existe");
                         $respuesta->responder();
@@ -127,6 +133,9 @@
                         break;
                     case 'modificarCiudad':
                         require_once("ciudades/modificarCiudad.php");
+                        break;
+                    case 'modificarInstitucionLaboral':
+                        require_once("institucionlaboral/modificarInstitucionLaboral.php");
                         break;
                     default:
                         $respuesta->preparar(404, "Accion no existe");
