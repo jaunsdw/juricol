@@ -10,16 +10,18 @@
                                 PrimerApellido = '$PrimerApellido',
                                 SegundoApellido = '$SegundoApellido',
                                 Documento = $Documento,
+                                TipoDocumento_id = $IdTipoDocumento,
+                                TarjetaProfecional = $TarjetaProfecional,
                                 Especialidad = $IdEspecialidad,
-                                Cargos_id =  $IdCargo,
+                                FechaNacimiento = '$FechaNacimiento',
+                                Cargos_id = $IdCargo,
                                 Titular = $Titular,
-                                Correo = '$Correo',
-                                Telefono = $Telefono,
-                                Celular = $Celular,
                                 Direccion = '$Direccion',
-                                FechaNacimiento = '$FechaNacimiento'
-                        WHERE Id = $IdEmpleado";    
-            
+                                Correo = '$Correo',
+                                Celular = $Celular,
+                                Telefono = $Telefono
+                        WHERE Id = $IdEmpleado";
+ 
             $miConexion->EjecutarSQL($SQL); 
 
             if ( $miConexion->GetCodigoRespuesta() == 400 ) {   

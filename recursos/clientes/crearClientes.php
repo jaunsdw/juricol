@@ -1,6 +1,5 @@
 <?php
 
-
 if ($miConexion->GetCodigoRespuesta() == 503 ){
         $respuesta->preparar(503,"Servicio No disponible BD");
     }else{

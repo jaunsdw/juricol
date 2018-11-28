@@ -5,19 +5,22 @@
     }else{
             
          if(!(isset($IdCliente)) || empty($IdCliente) ){
-            $sql="SELECT Id as 'IdCliente',
-                        PrimerNombre,
-                        SegundoNombre,
-                        PrimerApellido,
-                        SegundoApellido,
-                        Documento,
-                        Telefono,
-                        Celular,
-                        Direccion,
-                        Correo,
-                        FechaNacimiento    
-                    FROM clientes
-                    WHERE FechaInhabilitacion IS NULL";
+            $sql="SELECT   C.Id as 'IdCliente',
+                            C.PrimerNombre,
+                            C.SegundoNombre,
+                            C.PrimerApellido,
+                            C.SegundoApellido,
+                            C.Documento,
+                            C.Telefono,
+                            C.Celular,
+                            C.Direccion,
+                            C.Correo,
+                            C.FechaNacimiento,
+                            ciudades.Descripcion as 'CiudadResidencia'    
+                        FROM clientes AS C
+                            INNER JOIN ciudades 
+                                ON C.CiudadResidencia_id = ciudades.Id
+                        WHERE FechaInhabilitacion IS NULL";
 
          }else {
              $sql="SELECT Id as 'IdCliente',
@@ -25,13 +28,22 @@
                             SegundoNombre,
                             PrimerApellido,
                             SegundoApellido,
+                            TipoDocumento_id AS 'IdTipoDocumento',
                             Documento,
                             Telefono,
                             Celular,
                             Direccion,
+                            CiudadResidencia_id AS 'IdCiudad',
                             Correo,
-                            FechaNacimiento    
-                        FROM clientes 
+                            InstitucionLaboral_id AS 'IdInstitucionLaboral',
+                            NombreSustituto,
+                            CorreoSustituto,
+                            CelularSustituto,
+                            TipoDocumentoSustituto_id AS 'IdTipoDocumentoSusutituto',
+                            DocumentoSustituto, 
+                            Parentesco_id AS 'IdParentesco',
+                            FechaNacimiento   
+                        FROM clientes
                         WHERE Id = $IdCliente AND FechaInhabilitacion IS NULL";
          }
 

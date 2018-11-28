@@ -11,9 +11,12 @@
                             E.SegundoNombre as 'SegundoNombre',
                             E.PrimerApellido as 'PrimerApellido',
                             E.SegundoApellido as 'SegundoApellido',
+                            E.TipoDocumento_id as 'IdTipoDocumento',
+                            Tdoc.Descripcion as 'TipoDocumento',
                             E.Documento as 'Documento',
-                            Esp.Descripcion as 'Especialidad',
+                            E.TarjetaProfecional as 'TarjetaProfecional',
                             E.Especialidad as 'IdEspecialidad',
+                            Esp.Descripcion as 'Especialidad',
                             E.Cargos_id as 'IdCargo',
                             C.Descripcion as 'NombreCargo',
                             if(E.Titular = 0, 'No','Si') Titular,
@@ -27,7 +30,9 @@
                                 ON E.Cargos_id = C.Id
                             INNER JOIN especialidades as Esp
                                 ON E.Especialidad = Esp.Id
-                        WHERE E.FechaInhabilitacion IS NULL ";
+                            INNER JOIN tiposdocumentos as Tdoc
+                                ON E.TipoDocumento_id = Tdoc.Id
+                        WHERE E.FechaInhabilitacion IS NULL";
         }else {
             $sql="SELECT 	E.Id as 'IdEmpleado',
                             E.PrimerNombre as 'PrimerNombre',
