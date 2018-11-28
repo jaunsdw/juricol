@@ -5,7 +5,11 @@
     }else{
 
         if(!(isset($IdPais)) || empty($IdPais) ){
-            $sql="SELECT * FROM departamentos ";
+            if (!(isset($IdDepartamento)) || empty($IdDepartamento) ) {
+                $sql="SELECT * FROM departamentos ";
+            } else {
+                $sql="SELECT * FROM departamentos WHERE Id = $IdDepartamento ";
+            }
         }else {
             $sql="SELECT * FROM departamentos WHERE Paises_id = $IdPais";
         }

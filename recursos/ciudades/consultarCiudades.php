@@ -5,7 +5,12 @@
     }else{
 
         if(!(isset($IdDepartamento)) || empty($IdDepartamento) ){
-            $sql="SELECT * FROM ciudades ";
+            if (!(isset($IdCiudad)) || empty($IdCiudad)) {
+                $sql="SELECT * FROM ciudades ";
+            }else {
+                $sql="SELECT * FROM ciudades WHERE Id = $IdCiudad ";
+            }
+            
         }else {
             $sql="SELECT * FROM ciudades WHERE Departamentos_id = $IdDepartamento";
         }
