@@ -1,7 +1,9 @@
 
 <?php
-   
-    $fileName = $_FILES['MiArchivo']["tmp_name"];
+
+  //  $fileName = $_SERVER["DOCUMENT_ROOT"]."/juricol/recursos/pdf/ESTADO6.pdf";
+
+   $fileName = $_FILES['MiArchivo']["tmp_name"];
     $reader = new \Asika\Pdf2text;
     $datosConvertidos = $reader->decode($fileName);
     if ($miConexion->GetCodigoRespuesta() == 503 ){
@@ -143,7 +145,7 @@
 
             }elseif($porcentaje >= 93){
                 $fechaFin->add(new DateInterval('P'.$diasEstados[$i]['DiasLimite'].'D'));
-                $result = array("EstadoProbable"=>$descripcion,"FechaLimite"=> $fechaFin->format('Y-m-d'),"IdEstado"=>$diasEstados[$i]['Id']);
+                $result = array("EstadoProbable"=>$descripcion,"FechaLimite"=> $fechaFin->format('Y-m-d'),"IdEstado"=>$diasEstados[$i]['Id'],"Error"=>NULL);
                 $i++;
             }else{
                 $i++;

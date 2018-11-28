@@ -3,7 +3,7 @@
     if ($miConexion->GetCodigoRespuesta() == 503 ){
         $respuesta->preparar(503,"Servicio No disponible BD");
     }else{
-
+        $estadoDemandaNuevo = utf8_decode($estadoDemandaNuevo);
         $sql="INSERT INTO estadosdemandas (Descripcion,
                                     FechaCreacion,
                                    DiasLimite,
