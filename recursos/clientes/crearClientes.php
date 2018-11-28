@@ -37,7 +37,7 @@ if ($miConexion->GetCodigoRespuesta() == 503 ){
                                     $Documento,
                                     $IdCiudad,
                                     $IdInstitucionLaboral,
-                                    $telefono,
+                                    $Telefono,
                                     $Celular,
                                     '$Direccion',
                                     '$Correo',
