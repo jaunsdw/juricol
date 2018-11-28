@@ -120,6 +120,9 @@
                     case 'crearEstadoDemanda':
                         require_once("estadosdemandas/crearEstadoDemanda.php");
                         break;
+                    case 'crearDemanda':
+                        require_once("demandas/crearDemandas.php");
+                        break;
                     default:
                         $respuesta->preparar(404, "Accion no existe");
                         $respuesta->responder();

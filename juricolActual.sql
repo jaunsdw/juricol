@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-11-2018 a las 20:12:26
+-- Tiempo de generación: 28-11-2018 a las 20:17:08
 -- Versión del servidor: 10.1.33-MariaDB
 -- Versión de PHP: 7.2.6
 
@@ -116,7 +116,9 @@ CREATE TABLE `clientes` (
 --
 
 INSERT INTO `clientes` (`Id`, `PrimerNombre`, `SegundoNombre`, `PrimerApellido`, `SegundoApellido`, `Documento`, `Telefono`, `Celular`, `Direccion`, `Correo`, `FechaNacimiento`, `FechaCreacion`, `FechaInhabilitacion`, `TipoDocumento_id`, `CiudadResidencia_id`, `InstitucionLaboral_id`, `NombreSustituto`, `CelularSustituto`, `CorreoSustituto`, `TipoDocumentoSustituto_id`, `DocumentoSustituto`, `Parentesco_id`) VALUES
-(2, 'LUZ', 'NIDIA', 'LONDOÃ‘O', 'TAMAYO', 11105232021, 3122546, 235465777, 'Av siempre viva', 'Yo@gmail.com', '1988-05-05', '2018-11-27', NULL, 1, 1, 1, 'Maria Paula MariÃ±o', 3216546844, 'yo@gmail.com', 1, 2156546874, 3);
+(2, 'LUZ', 'NIDIA', 'LONDOÃ‘O', 'TAMAYO', 11105232021, 3122546, 235465777, 'Av siempre viva', 'Yo@gmail.com', '1988-05-05', '2018-11-27', NULL, 1, 1, 1, 'Maria Paula MariÃ±o', 3216546844, 'yo@gmail.com', 1, 2156546874, 3),
+(3, 'FERDINAN', '', 'YATE', 'CASTAÃ‘O', 8475623198, 3126, 23547, 'Apre viva', 'Yodf@gmail.com', '1988-08-08', '2018-11-27', NULL, 1, 1, 2, 'Maria Paula MariÃ±o', 3216546844, 'yo@gmail.com', 1, 2987446874, 3),
+(4, 'ANA', 'SOFIA', 'RAMOS', 'ALVAREZ', 8888888, NULL, 2358777, 'Apre vivaaaaaaaaa', 'Yodssssssf@gmail.com', '1987-06-07', '2018-11-27', NULL, 1, 1, 2, 'Maria Paula MariÃ±o', 3246844, 'yoss@gmail.com', 1, 29888874, 4);
 
 -- --------------------------------------------------------
 
@@ -139,6 +141,15 @@ CREATE TABLE `demandas` (
   `Categoria` tinyint(1) NOT NULL,
   `FechaCreacion` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `demandas`
+--
+
+INSERT INTO `demandas` (`Id`, `Clientes_id`, `NumDemanda`, `TiposDemandas_id`, `TiposProcesos_id`, `Juzgado_id`, `Titular_id`, `Suplente_id`, `Demandado`, `Descripcion`, `EstadosProcesos_id`, `Categoria`, `FechaCreacion`) VALUES
+(2, 2, '73001333300120160026900', 4, 4, 1, 1, 2, 'MUNICIPIO DE IBAGUE', 'ASDEDEFWEWEFEVV', 1, 1, '2018-11-28'),
+(3, 3, '73001333300120170040700', 5, 3, 1, 1, 2, 'LA NACION- MINISTERIO DE EDUCACION- MINISTERIO DE IBAGUE- FONDO NACIONAL DE PRESTACIONES SOCIALES DE', 'ASDEDEFWEWEFEVV', 1, 1, '2018-11-28'),
+(4, 4, '73001333300120180005500', 5, 3, 1, 1, 2, 'NACION- MINISTERIO DE EDUCACION NACIONAL', 'eerergertttert', 1, 1, '2018-11-28');
 
 -- --------------------------------------------------------
 
@@ -190,6 +201,14 @@ CREATE TABLE `empleados` (
   `FechaInhabilitacion` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `empleados`
+--
+
+INSERT INTO `empleados` (`Id`, `PrimerNombre`, `SegundoNombre`, `PrimerApellido`, `SegundoApellido`, `Documento`, `TipoDocumento_id`, `TarjetaProfecional`, `Especialidad`, `Estados`, `FechaNacimiento`, `Cargos_id`, `Titular`, `Direccion`, `Correo`, `Celular`, `Telefono`, `FechaCreacion`, `FechaInhabilitacion`) VALUES
+(1, 'Edwin', 'Fernando', 'LondoÃ±o', 'Jaramillo', 98745562, 1, 9874556255, 1, 'Activo', '1987-06-07', 1, 1, 'Apre vivaaaaaaaaa', 'Yodssssssf@gmail.com', 2358777, NULL, '2018-11-28', NULL),
+(2, 'Juan', 'Carlos', 'Bustos', 'Tobio', 100740786, 1, 9871441155, 2, 'Activo', '1990-07-02', 2, 0, 'Apre mmaaaaaa', 'Yodssssssf@gmail.com', 239877, NULL, '2018-11-28', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -225,6 +244,14 @@ CREATE TABLE `estadosdemandas` (
   `Tipo` enum('Fase','EstadoElectronico') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `estadosdemandas`
+--
+
+INSERT INTO `estadosdemandas` (`Id`, `Descripcion`, `FechaCreacion`, `DiasLimite`, `Tipo`) VALUES
+(1, 'Auto reconoce personerÃ­a', '2018-11-28', 10, ''),
+(2, 'Admite Demanda', '2018-11-28', 20, 'EstadoElectronico');
+
 -- --------------------------------------------------------
 
 --
@@ -244,7 +271,8 @@ CREATE TABLE `estadosprocesos` (
 INSERT INTO `estadosprocesos` (`Id`, `Descripcion`, `FechaCreacion`) VALUES
 (1, 'Admitida', '2018-11-27'),
 (2, 'Rechazada', '2018-11-27'),
-(3, 'Inactivaa', '2018-11-27');
+(3, 'Inactivaa', '2018-11-27'),
+(4, 'Activa', '2018-11-28');
 
 -- --------------------------------------------------------
 
@@ -424,7 +452,8 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`Id`, `Usuario`, `Password`, `Empleados_id`, `FechaCreacion`, `CodigoAsociado`) VALUES
-(1, 123456789, '123456789', NULL, '2018-11-27', NULL);
+(1, 123456789, '123456789', NULL, '2018-11-27', NULL),
+(2, 98745562, '987654321', 1, '2018-11-28', NULL);
 
 --
 -- Índices para tablas volcadas
@@ -602,13 +631,13 @@ ALTER TABLE `ciudades`
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `demandas`
 --
 ALTER TABLE `demandas`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `departamentos`
@@ -620,7 +649,7 @@ ALTER TABLE `departamentos`
 -- AUTO_INCREMENT de la tabla `empleados`
 --
 ALTER TABLE `empleados`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `especialidades`
@@ -632,13 +661,13 @@ ALTER TABLE `especialidades`
 -- AUTO_INCREMENT de la tabla `estadosdemandas`
 --
 ALTER TABLE `estadosdemandas`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `estadosprocesos`
 --
 ALTER TABLE `estadosprocesos`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `institucionlaboral`
@@ -692,7 +721,7 @@ ALTER TABLE `tiposdocumentos`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Restricciones para tablas volcadas

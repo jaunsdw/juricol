@@ -18,7 +18,7 @@
                                     Documento =  $Documento,
                                     CiudadResidencia_id = $IdCiudad,
                                     InstitucionLaboral_id = $IdInstitucionLaboral,
-                                    Telefono = $telefono,
+                                    Telefono = $Telefono,
                                     Celular = $Celular,
                                     Direccion = '$Direccion',
                                     Correo = '$Correo',

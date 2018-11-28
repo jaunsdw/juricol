@@ -2,7 +2,7 @@
     header("Access-Control-Allow-Origin:*");
     header("Access-Control-Allow-Headers:*");
     header("Access-Control-Allow-Methods: POST, GET, PUT");
-  
+
     
 
     if($_SERVER['REQUEST_METHOD'] == "OPTIONS"){
@@ -23,6 +23,11 @@
             $post_vars= json_decode($post_vars,true); // Descodificacion de json 
             
             if(isset($_GET['accion'])){
+                if($_GET['accion'] != "pdf"){
+                    $respuesta->preparar(401,'Llamado erroneo de accion por post');
+                    $respuesta->responder();
+                    exit();
+                }
                 $accion = validarAccion($_GET['accion']);
 
             }else{
@@ -62,18 +67,20 @@
 
     function acceder($accion,$token,$info){
 
+
         require_once("../servicios/conexionbd.php");  
         require_once("../servicios/token.php");
         require_once("../servicios/controlrespuesta.php");  // Llamado al servicio "controlrespuesta", quien es el encargado de administrar
         // las respuestas que retornen todos los recursos
-
+    
         require_once ('../../vendor/autoload.php');
-
+    
         $miToken = new Token;
         $resultado = NULL;  // Inicio de variable para resultados 
         $miConexion = new ConexionBD; // Instancia de la clase ConeccionBD
         $respuesta = new ControlRespuesta($miConexion); // instancia de la clase ControlRespuesta
         $miConexion->Conectar(); // Metodo que ejecuta la conexion con la base de datos
+      
      
 
 
