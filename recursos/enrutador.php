@@ -54,6 +54,9 @@
                     case 'consultarTiposProcesos':
                         require_once("tiposprocesos/consultarTiposProcesos.php");
                         break;
+                    case 'consultarEstadosDemandas':
+                        require_once("estadosdemandas/consultarEstadosDemandas.php");
+                        break;
                     default:
                         $respuesta->preparar(404, "Accion no existe");
                         $respuesta->responder();
@@ -114,6 +117,9 @@
                     case 'crearTipoProceso':
                         require_once("tiposprocesos/crearTipoProceso.php");
                         break;
+                    case 'crearEstadoDemanda':
+                        require_once("estadosdemandas/crearEstadoDemanda.php");
+                        break;
                     default:
                         $respuesta->preparar(404, "Accion no existe");
                         $respuesta->responder();
@@ -169,6 +175,9 @@
                         break;
                     case 'modificarTipoProceso':
                         require_once("tiposprocesos/modificarTipoProceso.php");
+                        break;
+                    case 'modificarEstadoDemanda':
+                        require_once("estadosdemandas/modificarEstadoDemanda.php");
                         break;
                     default:
                         $respuesta->preparar(404, "Accion no existe");
