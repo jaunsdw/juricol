@@ -68,9 +68,6 @@
 
                 $result = calcularFechaLimite($fechaInicio->format('Y-m-d'),$demandas[$i]['NuevoEstado'],$miConexion,$diasEstados);
 
-
-                
-
                     $demandasJuricol = array("IdDemanda"=>$juricol[0]['IdDemanda'],
                     "NumDemanda"=>$juricol[0]['NumDemanda'],
                     "Demandante"=>$demandas[$i]['Demandante'],
