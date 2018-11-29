@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-11-2018 a las 20:17:08
+-- Tiempo de generación: 29-11-2018 a las 13:45:05
 -- Versión del servidor: 10.1.33-MariaDB
 -- Versión de PHP: 7.2.6
 
@@ -249,8 +249,10 @@ CREATE TABLE `estadosdemandas` (
 --
 
 INSERT INTO `estadosdemandas` (`Id`, `Descripcion`, `FechaCreacion`, `DiasLimite`, `Tipo`) VALUES
-(1, 'Auto reconoce personerÃ­a', '2018-11-28', 10, ''),
-(2, 'Admite Demanda', '2018-11-28', 20, 'EstadoElectronico');
+(5, 'Auto ordena oficiar', '2018-11-28', 10, 'EstadoElectronico'),
+(7, 'Auto reconoce personería', '2018-11-28', 10, 'EstadoElectronico'),
+(8, 'Auto Resuelve Reposición ', '2018-11-28', 10, 'EstadoElectronico'),
+(12, 'Admite Demanda', '2018-11-28', 11, 'EstadoElectronico');
 
 -- --------------------------------------------------------
 
@@ -661,7 +663,7 @@ ALTER TABLE `especialidades`
 -- AUTO_INCREMENT de la tabla `estadosdemandas`
 --
 ALTER TABLE `estadosdemandas`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `estadosprocesos`
