@@ -8,10 +8,10 @@ if ($miConexion->GetCodigoRespuesta() == 503 ){
             $i = 0;
            $num = count($Movimientos);
             $inserciones = array();
-            echo "<pre>";
-            var_dump($Movimientos);
-            echo "</pre>";
-            exit();
+            // echo "<pre>";
+            // var_dump($Movimientos);
+            // echo "</pre>";
+       
            while($i < $num){
 
                 $IdDemanda = $Movimientos[$i]['IdDemanda'];
@@ -44,6 +44,8 @@ if ($miConexion->GetCodigoRespuesta() == 503 ){
 
                 $i++;
            }
+
+           $Movimientos = NULL;
 
            $respuesta->preparar(200,"Id insertados ".$inserciones);
            $respuesta->responder();  
