@@ -1,7 +1,7 @@
 <?php
     header("Access-Control-Allow-Origin:*");
     header("Access-Control-Allow-Headers:*");
-    header("Access-Control-Allow-Methods: POST, GET, PUT");
+    header("Access-Control-Allow-Methods: *");
 
     
 
@@ -42,6 +42,7 @@
             @acceder($accion,$token,$_GET);
     
         }elseif ($_SERVER['REQUEST_METHOD'] == "DELETE"){
+
             header("Access-Control-Allow-Methods: DELETE"); //Admicion para el metodo delete en especifico 
 
             @$accion = validarAccion($_GET['accion']);
