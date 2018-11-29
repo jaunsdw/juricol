@@ -3,7 +3,7 @@
         $respuesta->preparar(503,"Servicio No disponible BD");
     }else{
             
-        if(!(isset($Filtro)) || empty($Filtro)){
+        if(!(isset($IdDemanda)) || empty($IdDemanda){
             $sql="SELECT 
                     D.Id AS 'IdDemanda',
                     D.Clientes_id AS 'IdCliente',
@@ -46,9 +46,6 @@
                     INNER JOIN estadosprocesos AS ESP
                         ON ESP.Id = D.EstadosProcesos_id";
         }else {
-
-            switch ($Filtro) {
-                case 'Demanda':
                     $sql="SELECT 
                                 D.Id AS 'IdDemanda',
                                 D.Clientes_id AS 'IdCliente',
@@ -65,6 +62,10 @@
                                 ESP.Descripcion AS 'NombreEstadoProceso',
                                 IF(D.Categoria = 1,'Ataque','Defensa') AS 'Categoria',
                                 D.Categoria AS 'IdCategoria',
+                                D.Juzgado_id AS 'IdJuzgado',
+                                J.Descripcion AS 'NombreJuzgado',
+                                D.Tiposprocesos_id AS 'IdTipoProceso',
+                                TP.Descripcion AS 'NombreTipoProceso',
                                 D.FechaCreacion AS 'FechaCreacion'
                             FROM demandas AS D
                                 INNER JOIN clientes as C
@@ -77,12 +78,11 @@
                                     ON E2.Id = D.Suplente_id
                                 INNER JOIN estadosprocesos AS ESP
                                     ON ESP.Id = D.EstadosProcesos_id
+                                INNER JOIN juzgados AS J
+                                    ON J.Id = D.Juzgado_id
+                                INNER JOIN tipoprocesos AS TP
+                                    ON TP.Id = D.Tiposprocesos_id
                             WHERE D.Id = $IdDemanda";
-                    break;
-                
-                default:
-                    # code...
-                    break;
             }
             
         }
