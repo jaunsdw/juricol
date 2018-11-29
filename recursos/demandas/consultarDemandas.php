@@ -16,7 +16,7 @@
                         D.EstadosProcesos_id AS 'IdEstadoProceso',
                         ESP.Descripcion AS 'NombreEstadoProceso',
                         IF(D.Categoria = 1,'Ataque','Defensa') AS 'Categoria',
-                        D.Categoria AS 'IdCategoria',
+
                         D.FechaCreacion AS 'FechaCreacion'
                     FROM demandas AS D
                         INNER JOIN clientes as C
@@ -48,6 +48,7 @@
                                 D.EstadosProcesos_id AS 'IdEstadoProceso',
                                 ESP.Descripcion AS 'NombreEstadoProceso',
                                 IF(D.Categoria = 1,'Ataque','Defensa') AS 'Categoria',
+                                D.Categoria AS 'IdCategoria',
                                 D.FechaCreacion AS 'FechaCreacion'
                             FROM demandas AS D
                                 INNER JOIN clientes as C
