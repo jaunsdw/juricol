@@ -57,6 +57,9 @@
                     case 'consultarEstadosDemandas':
                         require_once("estadosdemandas/consultarEstadosDemandas.php");
                         break;
+                    case 'consultarMovimientos':
+                        require_once("movimientos/consultarMovimientos.php");
+                        break;
                     default:
                         $respuesta->preparar(404, "Accion no existe");
                         $respuesta->responder();
@@ -122,6 +125,9 @@
                         break;
                     case 'crearDemanda':
                         require_once("demandas/crearDemandas.php");
+                        break;
+                    case 'crearMovimiento':
+                        require_once("movimientos/crearMovimiento.php");
                         break;
                     default:
                         $respuesta->preparar(404, "Accion no existe");
