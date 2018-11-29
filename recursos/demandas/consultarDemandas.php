@@ -3,7 +3,8 @@
         $respuesta->preparar(503,"Servicio No disponible BD");
     }else{
             
-        if(!(isset($IdDemanda)) || empty($IdDemanda){
+        if(!(isset($IdDemanda)) || empty($IdDemanda)){
+
             $sql="SELECT 
                     D.Id AS 'IdDemanda',
                     D.Clientes_id AS 'IdCliente',
@@ -85,7 +86,8 @@
                             WHERE D.Id = $IdDemanda";
             }
             
-        }
+            
+        
 
 
         $miConexion->EjecutarSQL($sql);
