@@ -69,7 +69,7 @@
                 $result = calcularFechaLimite($fechaInicio->format('Y-m-d'),$demandas[$i]['NuevoEstado'],$miConexion,$diasEstados);
 
 
-                if($result['Error'] == NULL){
+                
 
                     $demandasJuricol = array("IdDemanda"=>$juricol[0]['IdDemanda'],
                     "NumDemanda"=>$juricol[0]['NumDemanda'],
@@ -80,19 +80,12 @@
                     "NuevoEstado"=>$demandas[$i]['NuevoEstado'],
                     "FechaCambio"=>$fechaInicio->format('Y-m-d'),
                     "FechaLimite"=>$result['FechaLimite'],
-                    "EstadoProbable"=>$result["EstadoProbable"]);
+                    "EstadoProbable"=>$result["EstadoProbable"],
+                    "Observacion"=>$result["Error"]);
 
                     array_push($total,$demandasJuricol);
-
                     
                     $i++;
-                }else {
-
-                    $demandasJuricol = $result['Error'];
-                    array_push($total,$demandasJuricol);
-
-                    $i++;
-                }
 
             }
         }
@@ -141,11 +134,12 @@
                 $fechaFin->add(new DateInterval('P'.$diasEstados[$i]['DiasLimite'].'D'));
                 $result["FechaLimite"] = $fechaFin->format('Y-m-d');
                 $result["IdEstado"] = $diasEstados[$i]['Id'];
+                $result["Error"] = "Estado 100% complatible con el almacenamiento";
                 $i++;
 
             }elseif($porcentaje >= 93){
                 $fechaFin->add(new DateInterval('P'.$diasEstados[$i]['DiasLimite'].'D'));
-                $result = array("EstadoProbable"=>$descripcion,"FechaLimite"=> $fechaFin->format('Y-m-d'),"IdEstado"=>$diasEstados[$i]['Id'],"Error"=>NULL);
+                $result = array("EstadoProbable"=>$descripcion,"FechaLimite"=> $fechaFin->format('Y-m-d'),"IdEstado"=>$diasEstados[$i]['Id'],"Error"=>"El estado es $porcentaje % compatible con el almacenamiento");
                 $i++;
             }else{
                 $i++;
