@@ -3,6 +3,10 @@
 if ($miConexion->GetCodigoRespuesta() == 503 ){
         $respuesta->preparar(503,"Servicio No disponible BD");
     }else{
+        if (empty($Telefono) || (!(isset($Telefono)))) {
+            $Telefono = NULL;
+        }
+        
 
         $sql="INSERT INTO empleados ( PrimerNombre,
                                 SegundoNombre,
