@@ -9,7 +9,8 @@ if ($miConexion->GetCodigoRespuesta() == 503 ){
             $i = 0;
            $num = count($Movimientos);
             $inserciones = array();
-
+          var_dump($num);
+          exit();
            while($i < $num){
 
                 $IdDemanda = $Movimientos[$i]['IdDemanda'];
