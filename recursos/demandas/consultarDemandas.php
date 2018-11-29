@@ -67,6 +67,7 @@
                                 J.Descripcion AS 'NombreJuzgado',
                                 D.Tiposprocesos_id AS 'IdTipoProceso',
                                 TP.Descripcion AS 'NombreTipoProceso',
+                                D.Demandado AS 'NombreDemandado',
                                 D.FechaCreacion AS 'FechaCreacion'
                             FROM demandas AS D
                                 INNER JOIN clientes as C
