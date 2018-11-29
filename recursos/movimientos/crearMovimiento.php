@@ -45,10 +45,12 @@ if ($miConexion->GetCodigoRespuesta() == 503 ){
                 $i++;
            }
 
-           unset($Movimientos);
+          
 
            $respuesta->preparar(200,"Inserciones correctas");
-           $respuesta->responder();  
+           $respuesta->responder();
+           
+           exit();
 
         }else {
       
