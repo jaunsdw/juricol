@@ -51,7 +51,6 @@
         }
 
         public function responder(){
-
                 $respuesta = array( 
                     "codigo"=> $this->codigoActual,  
                     "mensaje"=>  $this->respuestaActual,

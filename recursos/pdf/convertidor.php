@@ -1,7 +1,7 @@
 
 <?php
 
-  //  $fileName = $_SERVER["DOCUMENT_ROOT"]."/juricol/recursos/pdf/ESTADO6.pdf";
+  // $fileName = $_SERVER["DOCUMENT_ROOT"]."/juricol/recursos/pdf/ESTADO3.pdf";
 
    $fileName = $_FILES['MiArchivo']["tmp_name"];
     $reader = new \Asika\Pdf2text;
@@ -87,6 +87,7 @@
             }
         }
 
+
         return $total;
         
     }
@@ -121,6 +122,8 @@
 
         $num = count($diasEstados);
         $i = 0;
+
+       $estado = utf8_encode($estado);
 
         while ($i < $num) {
             $descripcion = utf8_encode($diasEstados[$i]['Descripcion']);
