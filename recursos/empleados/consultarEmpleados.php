@@ -49,14 +49,12 @@
                             Esp.Descripcion as 'Especialidad',
                             E.Cargos_id as 'IdCargo',
                             C.Descripcion as 'NombreCargo',
-                            if(E.Titular = 0, 'No','Si') Titular,
-                            E.Titular as 'IdTitular',
+                            E.Titular as 'Titular',
                             E.CiudadResidencia_id as 'IdCiudad',
                             E.Direccion as 'Direccion',
                             E.Correo as 'CorreoElectronico',
                             E.Telefono as 'Telefono',
-                            E.Celular as 'Celular',
-                            E.Estados as 'Estado'
+                            E.Celular as 'Celular'
                         FROM empleados as E
                             INNER JOIN cargos as C
                                 ON E.Cargos_id = C.Id
