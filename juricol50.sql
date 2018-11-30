@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-11-2018 a las 00:56:41
+-- Tiempo de generación: 30-11-2018 a las 09:38:25
 -- Versión del servidor: 10.1.33-MariaDB
 -- Versión de PHP: 7.2.6
 
@@ -47,17 +47,18 @@ CREATE TABLE `auditorias` (
 CREATE TABLE `cargos` (
   `Id` int(11) NOT NULL,
   `Descripcion` varchar(30) NOT NULL,
-  `FechaCreacion` date NOT NULL
+  `FechaCreacion` date NOT NULL,
+  `FechaInhabilitacion` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `cargos`
 --
 
-INSERT INTO `cargos` (`Id`, `Descripcion`, `FechaCreacion`) VALUES
-(1, 'Encargado de area penal', '2018-11-27'),
-(2, 'Recepcionista', '2018-11-27'),
-(3, 'Encargado del area civill', '2018-11-27');
+INSERT INTO `cargos` (`Id`, `Descripcion`, `FechaCreacion`, `FechaInhabilitacion`) VALUES
+(1, 'Encargado de area penal', '2018-11-27', NULL),
+(2, 'Recepcionista', '2018-11-27', NULL),
+(3, 'Encargado del area civill', '2018-11-27', NULL);
 
 -- --------------------------------------------------------
 
@@ -68,17 +69,18 @@ INSERT INTO `cargos` (`Id`, `Descripcion`, `FechaCreacion`) VALUES
 CREATE TABLE `ciudades` (
   `Id` int(11) NOT NULL,
   `Descripcion` varchar(35) NOT NULL,
-  `Departamentos_id` int(11) NOT NULL
+  `Departamentos_id` int(11) NOT NULL,
+  `FechaInhabilitacion` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `ciudades`
 --
 
-INSERT INTO `ciudades` (`Id`, `Descripcion`, `Departamentos_id`) VALUES
-(1, 'Ibague', 1),
-(2, 'Espinal', 1),
-(3, 'Chaparrall', 1);
+INSERT INTO `ciudades` (`Id`, `Descripcion`, `Departamentos_id`, `FechaInhabilitacion`) VALUES
+(1, 'Ibague', 1, NULL),
+(2, 'Espinal', 1, NULL),
+(3, 'Chaparrall', 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -160,18 +162,19 @@ INSERT INTO `demandas` (`Id`, `Clientes_id`, `NumDemanda`, `TiposDemandas_id`, `
 CREATE TABLE `departamentos` (
   `Id` int(11) NOT NULL,
   `Descripcion` varchar(35) NOT NULL,
-  `Paises_id` int(11) NOT NULL
+  `Paises_id` int(11) NOT NULL,
+  `FechaInhabilitacion` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `departamentos`
 --
 
-INSERT INTO `departamentos` (`Id`, `Descripcion`, `Paises_id`) VALUES
-(1, 'Tolima', 1),
-(2, 'Tacamandapio', 2),
-(3, 'Cundinamarca', 1),
-(4, 'Antioquia', 1);
+INSERT INTO `departamentos` (`Id`, `Descripcion`, `Paises_id`, `FechaInhabilitacion`) VALUES
+(1, 'Tolima', 1, NULL),
+(2, 'Tacamandapio', 2, NULL),
+(3, 'Cundinamarca', 1, NULL),
+(4, 'Antioquia', 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -187,12 +190,13 @@ CREATE TABLE `empleados` (
   `SegundoApellido` varchar(20) NOT NULL,
   `Documento` int(11) NOT NULL,
   `TipoDocumento_id` int(11) NOT NULL,
-  `TarjetaProfecional` bigint(20) NOT NULL,
+  `TarjetaProfesional` bigint(20) NOT NULL,
   `Especialidad` int(11) NOT NULL,
   `Estados` enum('Activo','Desactivo') NOT NULL,
   `FechaNacimiento` date NOT NULL,
   `Cargos_id` int(11) NOT NULL,
   `Titular` tinyint(1) NOT NULL,
+  `CiudadResidencia_id` int(11) NOT NULL,
   `Direccion` varchar(50) NOT NULL,
   `Correo` varchar(50) NOT NULL,
   `Celular` bigint(15) NOT NULL,
@@ -205,9 +209,9 @@ CREATE TABLE `empleados` (
 -- Volcado de datos para la tabla `empleados`
 --
 
-INSERT INTO `empleados` (`Id`, `PrimerNombre`, `SegundoNombre`, `PrimerApellido`, `SegundoApellido`, `Documento`, `TipoDocumento_id`, `TarjetaProfecional`, `Especialidad`, `Estados`, `FechaNacimiento`, `Cargos_id`, `Titular`, `Direccion`, `Correo`, `Celular`, `Telefono`, `FechaCreacion`, `FechaInhabilitacion`) VALUES
-(1, 'Edwin', 'Fernando', 'LondoÃ±o', 'Jaramillo', 98745562, 1, 9874556255, 1, 'Activo', '1987-06-07', 1, 1, 'Apre vivaaaaaaaaa', 'Yodssssssf@gmail.com', 2358777, NULL, '2018-11-28', NULL),
-(2, 'Juan', 'Carlos', 'Bustos', 'Tobio', 100740786, 1, 9871441155, 2, 'Activo', '1990-07-02', 2, 0, 'Apre mmaaaaaa', 'Yodssssssf@gmail.com', 239877, NULL, '2018-11-28', NULL);
+INSERT INTO `empleados` (`Id`, `PrimerNombre`, `SegundoNombre`, `PrimerApellido`, `SegundoApellido`, `Documento`, `TipoDocumento_id`, `TarjetaProfesional`, `Especialidad`, `Estados`, `FechaNacimiento`, `Cargos_id`, `Titular`, `CiudadResidencia_id`, `Direccion`, `Correo`, `Celular`, `Telefono`, `FechaCreacion`, `FechaInhabilitacion`) VALUES
+(1, 'Edwin', 'Fernando', 'LondoÃ±o', 'Jaramillo', 98745562, 1, 9874556255, 1, 'Activo', '1987-06-07', 1, 1, 1, 'Apre vivaaaaaaaaa', 'Yodssssssf@gmail.com', 2358777, NULL, '2018-11-28', NULL),
+(2, 'Juan', 'Carlos', 'Bustos', 'Tobio', 100740786, 1, 9871441155, 2, 'Activo', '1990-07-02', 2, 0, 1, 'Apre mmaaaaaa', 'Yodssssssf@gmail.com', 239877, NULL, '2018-11-28', NULL);
 
 -- --------------------------------------------------------
 
@@ -218,17 +222,18 @@ INSERT INTO `empleados` (`Id`, `PrimerNombre`, `SegundoNombre`, `PrimerApellido`
 CREATE TABLE `especialidades` (
   `Id` int(11) NOT NULL,
   `Descripcion` varchar(30) NOT NULL,
-  `FechaCreacion` date NOT NULL
+  `FechaCreacion` date NOT NULL,
+  `FechaInhabilitacion` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `especialidades`
 --
 
-INSERT INTO `especialidades` (`Id`, `Descripcion`, `FechaCreacion`) VALUES
-(1, 'Juridico', '2018-11-27'),
-(2, 'Penal', '2018-11-27'),
-(3, 'Familiaa', '2018-11-27');
+INSERT INTO `especialidades` (`Id`, `Descripcion`, `FechaCreacion`, `FechaInhabilitacion`) VALUES
+(1, 'Juridico', '2018-11-27', NULL),
+(2, 'Penal', '2018-11-27', NULL),
+(3, 'Familiaa', '2018-11-27', NULL);
 
 -- --------------------------------------------------------
 
@@ -241,20 +246,21 @@ CREATE TABLE `estadosdemandas` (
   `Descripcion` varchar(50) NOT NULL,
   `FechaCreacion` date NOT NULL,
   `DiasLimite` smallint(6) NOT NULL,
-  `Tipo` enum('Fase','EstadoElectronico') NOT NULL
+  `Tipo` enum('Fase','EstadoElectronico') NOT NULL,
+  `FechaInhabilitacion` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `estadosdemandas`
 --
 
-INSERT INTO `estadosdemandas` (`Id`, `Descripcion`, `FechaCreacion`, `DiasLimite`, `Tipo`) VALUES
-(5, 'Auto ordena oficiar', '2018-11-28', 5, 'EstadoElectronico'),
-(12, 'Admite Demanda', '2018-11-28', 5, 'EstadoElectronico'),
-(13, 'Agotamiento', '2018-11-29', 90, 'Fase'),
-(14, 'Procuraduria', '2018-11-29', 120, 'Fase'),
-(15, 'Auto Resuelve ReposiciÃ³n', '2018-11-29', 13, 'EstadoElectronico'),
-(16, 'Auto reconoce personerÃ­a', '2018-11-29', 13, 'EstadoElectronico');
+INSERT INTO `estadosdemandas` (`Id`, `Descripcion`, `FechaCreacion`, `DiasLimite`, `Tipo`, `FechaInhabilitacion`) VALUES
+(5, 'Auto ordena oficiar', '2018-11-28', 5, 'EstadoElectronico', NULL),
+(12, 'Admite Demanda', '2018-11-28', 5, 'EstadoElectronico', NULL),
+(13, 'Agotamiento', '2018-11-29', 90, 'Fase', NULL),
+(14, 'Procuraduria', '2018-11-29', 120, 'Fase', NULL),
+(15, 'Auto Resuelve ReposiciÃ³n', '2018-11-29', 13, 'EstadoElectronico', NULL),
+(16, 'Auto reconoce personerÃ­a', '2018-11-29', 13, 'EstadoElectronico', NULL);
 
 -- --------------------------------------------------------
 
@@ -265,18 +271,19 @@ INSERT INTO `estadosdemandas` (`Id`, `Descripcion`, `FechaCreacion`, `DiasLimite
 CREATE TABLE `estadosprocesos` (
   `Id` int(11) NOT NULL,
   `Descripcion` varchar(20) NOT NULL,
-  `FechaCreacion` date NOT NULL
+  `FechaCreacion` date NOT NULL,
+  `FechaInhabilitacion` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `estadosprocesos`
 --
 
-INSERT INTO `estadosprocesos` (`Id`, `Descripcion`, `FechaCreacion`) VALUES
-(1, 'Admitida', '2018-11-27'),
-(2, 'Rechazada', '2018-11-27'),
-(3, 'Inactivaa', '2018-11-27'),
-(4, 'Activa', '2018-11-28');
+INSERT INTO `estadosprocesos` (`Id`, `Descripcion`, `FechaCreacion`, `FechaInhabilitacion`) VALUES
+(1, 'Admitida', '2018-11-27', NULL),
+(2, 'Rechazada', '2018-11-27', NULL),
+(3, 'Inactivaa', '2018-11-27', NULL),
+(4, 'Activa', '2018-11-28', NULL);
 
 -- --------------------------------------------------------
 
@@ -287,17 +294,18 @@ INSERT INTO `estadosprocesos` (`Id`, `Descripcion`, `FechaCreacion`) VALUES
 CREATE TABLE `institucionlaboral` (
   `Id` int(11) NOT NULL,
   `Descripcion` varchar(60) NOT NULL,
-  `Ciudad_id` int(11) NOT NULL
+  `Ciudad_id` int(11) NOT NULL,
+  `FechaInhabilitacion` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `institucionlaboral`
 --
 
-INSERT INTO `institucionlaboral` (`Id`, `Descripcion`, `Ciudad_id`) VALUES
-(1, 'Colegio Anita', 1),
-(2, 'Colegio Fatima', 2),
-(3, 'Colegio Sagrada Familia', 1);
+INSERT INTO `institucionlaboral` (`Id`, `Descripcion`, `Ciudad_id`, `FechaInhabilitacion`) VALUES
+(1, 'Colegio Anita', 1, NULL),
+(2, 'Colegio Fatima', 2, NULL),
+(3, 'Colegio Sagrada Familia', 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -307,17 +315,18 @@ INSERT INTO `institucionlaboral` (`Id`, `Descripcion`, `Ciudad_id`) VALUES
 
 CREATE TABLE `juzgados` (
   `Id` int(11) NOT NULL,
-  `Descripcion` varchar(50) NOT NULL
+  `Descripcion` varchar(50) NOT NULL,
+  `FechaInhabilitacion` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `juzgados`
 --
 
-INSERT INTO `juzgados` (`Id`, `Descripcion`) VALUES
-(1, '01 administrativo de ibague'),
-(2, '02 administrativo de ibague'),
-(3, '07 administrativo de ibague');
+INSERT INTO `juzgados` (`Id`, `Descripcion`, `FechaInhabilitacion`) VALUES
+(1, '01 administrativo de ibague', NULL),
+(2, '02 administrativo de ibague', NULL),
+(3, '07 administrativo de ibague', NULL);
 
 -- --------------------------------------------------------
 
@@ -354,16 +363,17 @@ INSERT INTO `movimientos` (`Id`, `Demandas_id`, `EstadosDemandas_id`, `FechaMovi
 
 CREATE TABLE `paises` (
   `Id` int(11) NOT NULL,
-  `Descripcion` varchar(35) NOT NULL
+  `Descripcion` varchar(35) NOT NULL,
+  `FechaInhabilitacion` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `paises`
 --
 
-INSERT INTO `paises` (`Id`, `Descripcion`) VALUES
-(1, 'Colombia'),
-(2, 'PerÃº');
+INSERT INTO `paises` (`Id`, `Descripcion`, `FechaInhabilitacion`) VALUES
+(1, 'Colombia', NULL),
+(2, 'PerÃº', NULL);
 
 -- --------------------------------------------------------
 
@@ -373,17 +383,18 @@ INSERT INTO `paises` (`Id`, `Descripcion`) VALUES
 
 CREATE TABLE `parentesco` (
   `Id` int(11) NOT NULL,
-  `Descripcion` varchar(15) NOT NULL
+  `Descripcion` varchar(15) NOT NULL,
+  `FechaInhabilitacion` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `parentesco`
 --
 
-INSERT INTO `parentesco` (`Id`, `Descripcion`) VALUES
-(4, 'conyuge'),
-(3, 'Hijo'),
-(2, 'Padre');
+INSERT INTO `parentesco` (`Id`, `Descripcion`, `FechaInhabilitacion`) VALUES
+(2, 'Padre', NULL),
+(3, 'Hijo', NULL),
+(4, 'conyuge', NULL);
 
 -- --------------------------------------------------------
 
@@ -393,18 +404,19 @@ INSERT INTO `parentesco` (`Id`, `Descripcion`) VALUES
 
 CREATE TABLE `tipoprocesos` (
   `Id` int(11) NOT NULL,
-  `Descripcion` varchar(50) NOT NULL
+  `Descripcion` varchar(50) NOT NULL,
+  `FechaInhabilitacion` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `tipoprocesos`
 --
 
-INSERT INTO `tipoprocesos` (`Id`, `Descripcion`) VALUES
-(3, 'Ejecutivo'),
-(4, 'Ejecutivo prima de servicioss'),
-(1, 'Homologacion'),
-(2, 'Sancion cesantias parciales');
+INSERT INTO `tipoprocesos` (`Id`, `Descripcion`, `FechaInhabilitacion`) VALUES
+(1, 'Homologacion', NULL),
+(2, 'Sancion cesantias parciales', NULL),
+(3, 'Ejecutivo', NULL),
+(4, 'Ejecutivo prima de servicioss', NULL);
 
 -- --------------------------------------------------------
 
@@ -415,18 +427,19 @@ INSERT INTO `tipoprocesos` (`Id`, `Descripcion`) VALUES
 CREATE TABLE `tiposdemandas` (
   `Id` int(11) NOT NULL,
   `Descripcion` varchar(30) NOT NULL,
-  `FechaCreacion` date NOT NULL
+  `FechaCreacion` date NOT NULL,
+  `FechaInhabilitacion` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `tiposdemandas`
 --
 
-INSERT INTO `tiposdemandas` (`Id`, `Descripcion`, `FechaCreacion`) VALUES
-(2, 'Civil', '2018-11-27'),
-(3, 'Penal', '2018-11-27'),
-(4, 'Administrativa', '2018-11-27'),
-(5, 'Judicialll', '2018-11-27');
+INSERT INTO `tiposdemandas` (`Id`, `Descripcion`, `FechaCreacion`, `FechaInhabilitacion`) VALUES
+(2, 'Civil', '2018-11-27', NULL),
+(3, 'Penal', '2018-11-27', NULL),
+(4, 'Administrativa', '2018-11-27', NULL),
+(5, 'Judicialll', '2018-11-27', NULL);
 
 -- --------------------------------------------------------
 
@@ -436,17 +449,18 @@ INSERT INTO `tiposdemandas` (`Id`, `Descripcion`, `FechaCreacion`) VALUES
 
 CREATE TABLE `tiposdocumentos` (
   `Id` int(11) NOT NULL,
-  `Descripcion` varchar(20) NOT NULL
+  `Descripcion` varchar(20) NOT NULL,
+  `FechaInhabilitacion` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `tiposdocumentos`
 --
 
-INSERT INTO `tiposdocumentos` (`Id`, `Descripcion`) VALUES
-(1, 'Cedula de ciudadania'),
-(2, 'Extranjeria'),
-(3, 'Tarjeta');
+INSERT INTO `tiposdocumentos` (`Id`, `Descripcion`, `FechaInhabilitacion`) VALUES
+(1, 'Cedula de ciudadania', NULL),
+(2, 'Extranjeria', NULL),
+(3, 'Tarjeta', NULL);
 
 -- --------------------------------------------------------
 
@@ -537,7 +551,8 @@ ALTER TABLE `empleados`
   ADD UNIQUE KEY `Documento` (`Documento`),
   ADD KEY `empleados_ibfk_1` (`Cargos_id`),
   ADD KEY `empleados_ibfk_2` (`Especialidad`),
-  ADD KEY `TipoDocumento_id` (`TipoDocumento_id`);
+  ADD KEY `empleados_ibfk_3` (`TipoDocumento_id`),
+  ADD KEY `CiudadResidencia_id` (`CiudadResidencia_id`);
 
 --
 -- Indices de la tabla `especialidades`
@@ -702,7 +717,7 @@ ALTER TABLE `juzgados`
 -- AUTO_INCREMENT de la tabla `movimientos`
 --
 ALTER TABLE `movimientos`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `paises`
@@ -790,7 +805,8 @@ ALTER TABLE `departamentos`
 ALTER TABLE `empleados`
   ADD CONSTRAINT `empleados_ibfk_1` FOREIGN KEY (`Cargos_id`) REFERENCES `cargos` (`Id`) ON DELETE NO ACTION ON UPDATE CASCADE,
   ADD CONSTRAINT `empleados_ibfk_2` FOREIGN KEY (`Especialidad`) REFERENCES `especialidades` (`Id`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `empleados_ibfk_3` FOREIGN KEY (`TipoDocumento_id`) REFERENCES `tiposdocumentos` (`Id`);
+  ADD CONSTRAINT `empleados_ibfk_3` FOREIGN KEY (`TipoDocumento_id`) REFERENCES `tiposdocumentos` (`Id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `empleados_ibfk_4` FOREIGN KEY (`CiudadResidencia_id`) REFERENCES `ciudades` (`Id`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `institucionlaboral`
