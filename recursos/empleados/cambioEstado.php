@@ -5,10 +5,13 @@
         else{              
             
             $estadoActual = verificarEstadoActual($IdEmpleado,$miConexion);
-
-            var_dump($estadoActual);
-            exit();
-        
+            
+            if ($estadoActual == "Activo") {
+                $nuevoEstado =  "Desactivo";
+            } else {
+                $nuevoEstado = "Activo";
+            }
+            
             $SQL = "UPDATE empleados  
                            SET Estados = '$nuevoEstado'
                         WHERE Id = $IdEmpleado";
@@ -41,14 +44,9 @@
  
         $miConexion->EjecutarSQL($SQL); 
 
-        if ( $miConexion->GetCodigoRespuesta() == 400 ) {   
-            $error = $miConexion->GetError();
-            $respuesta->preparar(400, "Error al consultar (".$SQL.") ".$error);
-            
-        }else {
             $resultado = $miConexion->GetResultados();
             $estadoActual = $resultado[0]['Estados'];
             return $estadoActual;
-        }
+        
     }
 ?>
