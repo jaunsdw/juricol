@@ -188,6 +188,9 @@
                     case 'modificarEstadoDemanda':
                         require_once("estadosdemandas/modificarEstadoDemanda.php");
                         break;
+                    case 'modificarDemanda':
+                        require_once("demandas/modificarDemandas.php");
+                        break;
                     default:
                         $respuesta->preparar(404, "Accion no existe");
                         $respuesta->responder();
