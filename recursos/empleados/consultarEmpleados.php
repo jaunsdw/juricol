@@ -54,7 +54,8 @@
                             E.Direccion as 'Direccion',
                             E.Correo as 'CorreoElectronico',
                             E.Telefono as 'Telefono',
-                            E.Celular as 'Celular'
+                            E.Celular as 'Celular',
+                            E.FechaNacimiento as 'FechaNacimiento'
                         FROM empleados as E
                             INNER JOIN cargos as C
                                 ON E.Cargos_id = C.Id
