@@ -140,7 +140,7 @@
                     case 'cambiarPassword';
                         require_once("usuarios/modificarUsuario.php");
                         break;
-                    case 'modificarEmpleados':
+                    case 'modificarEmpleado':
                         require_once("empleados/modificarEmpleados.php");
                         break;
                     case 'cambioEstadoEmpleado':
