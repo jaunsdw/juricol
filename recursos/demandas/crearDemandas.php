@@ -37,7 +37,7 @@ if ($miConexion->GetCodigoRespuesta() == 503 ){
         }else{
 
             $resultado = $miConexion->ConsultarIdInsertado();
-            $respuesta->preparar(200,"Id insertado ".$resultado);
+            $respuesta->preparar(200,$resultado);
  
         }
     }
