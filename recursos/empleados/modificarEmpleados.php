@@ -4,7 +4,26 @@
         }
         else{                                 
         
-            $SQL = "UPDATE empleados  
+            if (empty($Telefono) || (!(isset($Telefono))) || $Telefono == NULL) {
+                $SQL = "UPDATE empleados  
+                            SET PrimerNombre = '$PrimerNombre',
+                                SegundoNombre = '$SegundoNombre',
+                                PrimerApellido = '$PrimerApellido',
+                                SegundoApellido = '$SegundoApellido',
+                                Documento = $Documento,
+                                TipoDocumento_id = $IdTipoDocumento,
+                                TarjetaProfesional = $TarjetaProfesional,
+                                Especialidad = $IdEspecialidad,
+                                FechaNacimiento = '$FechaNacimiento',
+                                Cargos_id = $IdCargo,
+                                Titular = $Titular,
+                                Direccion = '$Direccion',
+                                Correo = '$Correo',
+                                Celular = $Celular,
+                                Telefono = NULL
+                        WHERE Id = $IdEmpleado";
+            }else {
+                $SQL = "UPDATE empleados  
                             SET PrimerNombre = '$PrimerNombre',
                                 SegundoNombre = '$SegundoNombre',
                                 PrimerApellido = '$PrimerApellido',
@@ -21,6 +40,9 @@
                                 Celular = $Celular,
                                 Telefono = $Telefono
                         WHERE Id = $IdEmpleado";
+                
+            }
+
  
             $miConexion->EjecutarSQL($SQL); 
 

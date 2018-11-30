@@ -5,9 +5,9 @@
     }else{
 
         if(!(isset($IdCiudad)) || empty($IdCiudad) ){
-            $sql="SELECT * FROM institucionlaboral ";
+            $sql="SELECT * FROM institucionlaboral WHERE FechaInhabilitacion IS NULL";
         }else {
-            $sql="SELECT * FROM institucionlaboral WHERE Ciudad_id = $IdCiudad";
+            $sql="SELECT * FROM institucionlaboral WHERE Ciudad_id = $IdCiudad AND FechaInhabilitacion IS NULL";
         }
         
 

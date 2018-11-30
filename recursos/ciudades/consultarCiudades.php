@@ -6,13 +6,13 @@
 
         if(!(isset($IdDepartamento)) || empty($IdDepartamento) ){
             if (!(isset($IdCiudad)) || empty($IdCiudad)) {
-                $sql="SELECT * FROM ciudades ";
+                $sql="SELECT * FROM ciudades WHERE FechaInhabilitacion IS NULL ";
             }else {
-                $sql="SELECT * FROM ciudades WHERE Id = $IdCiudad ";
+                $sql="SELECT * FROM ciudades WHERE Id = $IdCiudad  AND FechaInhabilitacion IS NULL";
             }
             
         }else {
-            $sql="SELECT * FROM ciudades WHERE Departamentos_id = $IdDepartamento";
+            $sql="SELECT * FROM ciudades WHERE Departamentos_id = $IdDepartamento AND FechaInhabilitacion IS NULL";
         }
         
 

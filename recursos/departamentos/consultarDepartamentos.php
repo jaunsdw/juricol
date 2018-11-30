@@ -6,12 +6,12 @@
 
         if(!(isset($IdPais)) || empty($IdPais) ){
             if (!(isset($IdDepartamento)) || empty($IdDepartamento) ) {
-                $sql="SELECT * FROM departamentos ";
+                $sql="SELECT * FROM departamentos WHERE FechaInhabilitacion IS NULL ";
             } else {
-                $sql="SELECT * FROM departamentos WHERE Id = $IdDepartamento ";
+                $sql="SELECT * FROM departamentos WHERE Id = $IdDepartamento AND FechaInhabilitacion IS NULL ";
             }
         }else {
-            $sql="SELECT * FROM departamentos WHERE Paises_id = $IdPais";
+            $sql="SELECT * FROM departamentos WHERE Paises_id = $IdPais AND FechaInhabilitacion IS NULL";
         }
         
 

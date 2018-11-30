@@ -5,7 +5,7 @@
         $respuesta->preparar(503,"Servicio No disponible BD");
     }else{
 
-        $sql="SELECT * FROM especialidades ";
+        $sql="SELECT * FROM especialidades WHERE FechaInhabilitacion IS NULL";
 
         $miConexion->EjecutarSQL($sql);
         
