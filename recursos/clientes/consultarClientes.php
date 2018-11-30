@@ -20,7 +20,7 @@
                         FROM clientes AS C
                             INNER JOIN ciudades 
                                 ON C.CiudadResidencia_id = ciudades.Id
-                        WHERE FechaInhabilitacion IS NULL";
+                        WHERE C.FechaInhabilitacion IS NULL";
 
          }else {
              $sql="SELECT Id as 'IdCliente',
@@ -44,7 +44,7 @@
                             Parentesco_id AS 'IdParentesco',
                             FechaNacimiento   
                         FROM clientes
-                        WHERE Id = $IdCliente AND FechaInhabilitacion IS NULL";
+                        WHERE Id = $IdCliente AND C.FechaInhabilitacion IS NULL";
          }
 
         $miConexion->EjecutarSQL($sql);
