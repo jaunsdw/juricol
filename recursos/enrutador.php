@@ -9,9 +9,6 @@
                     case 'consultarCargos':
                         require_once("cargos/consultarCargos.php");
                         break;
-                    case 'consultarEstadosEmpleados':
-                        require_once("estadosempleados/consultarEstados.php");
-                        break;
                     case 'consultarEspecialidades':
                         require_once("especialidades/consultarEspecialidades.php");
                         break;
@@ -74,9 +71,6 @@
                         break;
                     case 'crearCargo':
                         require_once("cargos/crearCargos.php");
-                        break;
-                    case 'crearEstadoEmpleado':
-                        require_once("estadosempleados/crearEstados.php");
                         break;
                     case 'crearEmpleado';
                         require_once("empleados/crearEmpleados.php");
@@ -203,7 +197,46 @@
                         require_once("clientes/eliminarCliente.php");
                         break;
                     case 'eliminarEmpleado':
-                        require_once("empleados/eliminarEmpleado");
+                        require_once("empleados/eliminarEmpleado.php");
+                        break;
+                    case 'eliminarCargo':
+                        require_once("cargos/eliminarCargos.php");
+                        break;
+                    case 'eliminarCiudad':
+                        require_once("ciudades/eliminarCiudades.php");
+                        break;
+                    case 'eliminarDepartamento':
+                        require_once("departamentos/eliminarDepartamentos.php");
+                        break;
+                    case 'eliminarEspecialidad':
+                        require_once("especialidades/eliminarEspecialidad.php");
+                        break;
+                    case 'eliminarEstadoDemanda':
+                        require_once("estadosDemandas/eliminarEstadoDemanda.php");
+                        break;
+                    case 'eliminarEstadoProceso':
+                        require_once("estadosprocesos/eliminarEstadProceso.php");
+                        break; 
+                    case 'eliminarInstitucionLaboral':
+                        require_once("institucionlaboral/eliminarInstitucionLaboral.php");
+                        break; 
+                    case 'eliminarJuzgados':
+                        require_once("juzgados/eliminarJuzgado.php");
+                        break; 
+                    case 'eliminarPais':
+                        require_once("paises/eliminarPais.php");
+                        break; 
+                    case 'eliminarParentesco':
+                        require_once("parentesco/eliminarParentesco.php");
+                        break;
+                    case 'eliminarTipoDemanda':
+                        require_once("tiposdemandas/eliminaTipoDamanda.php");
+                        break;
+                    case 'eliminarTipoDocumento':
+                        require_once("tiposdocumentos/eliminaTipoDocumento.php");
+                        break;
+                    case 'eliminarTipoProceso':
+                        require_once("tiposdprocesos/eliminaTipoProceso.php");
                         break;
                     default:
                         $respuesta->preparar(404, "Accion no existe");
