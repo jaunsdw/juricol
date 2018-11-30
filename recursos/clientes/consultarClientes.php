@@ -44,7 +44,7 @@
                             Parentesco_id AS 'IdParentesco',
                             FechaNacimiento   
                         FROM clientes
-                        WHERE Id = $IdCliente AND C.FechaInhabilitacion IS NULL";
+                        WHERE Id = $IdCliente AND FechaInhabilitacion IS NULL";
          }
 
         $miConexion->EjecutarSQL($sql);
