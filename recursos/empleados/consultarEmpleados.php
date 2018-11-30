@@ -19,6 +19,7 @@
                             E.Cargos_id as 'IdCargo',
                             C.Descripcion as 'NombreCargo',
                             if(E.Titular = 0, 'No','Si') Titular,
+                            R.Descripcion as 'NombreCiudad',
                             E.Direccion as 'Direccion',
                             E.Correo as 'CorreoElectronico',
                             E.Telefono as 'Telefono',
@@ -31,6 +32,8 @@
                                 ON E.Especialidad = Esp.Id
                             INNER JOIN tiposdocumentos as Tdoc
                                 ON E.TipoDocumento_id = Tdoc.Id
+                            INNER JOIN ciudades as R 
+                                ON E.CiudadResidencia_id = R.Id
                         WHERE E.FechaInhabilitacion IS NULL";
         }else {
             $sql="SELECT 	E.Id as 'IdEmpleado',
@@ -47,6 +50,8 @@
                             E.Cargos_id as 'IdCargo',
                             C.Descripcion as 'NombreCargo',
                             if(E.Titular = 0, 'No','Si') Titular,
+                            E.Titular as 'IdTitular',
+                            E.CiudadResidencia_id as 'IdCiudad',
                             E.Direccion as 'Direccion',
                             E.Correo as 'CorreoElectronico',
                             E.Telefono as 'Telefono',
