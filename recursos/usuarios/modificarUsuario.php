@@ -7,7 +7,7 @@
 
         if (!(isset($IdUsuario)) ||  empty($IdUsuario)) {
             $sql="UPDATE usuarios  
-                    SET Password = $NuevaClave
+                    SET Password = '$NuevaClave'
                     WHERE Usuario = $NomUsuario"; 
 
 
@@ -25,7 +25,7 @@
             }else {
 
                 $sql="UPDATE usuarios  
-                SET Password = $NuevaClave
+                SET Password = '$NuevaClave'
                 WHERE Id = $IdUsuario";
 
                 $resultado = cambiarContraseña($miConexion,$sql);
@@ -70,6 +70,7 @@
     function cambiarContraseña($miConexion,$sql){
 
         $miConexion->EjecutarSQL($sql);
+
         
         if ($miConexion->GetCodigoRespuesta() == 400){
             $error = $miConexion->GetError();
