@@ -11,7 +11,7 @@
                                 SegundoApellido = '$SegundoApellido',
                                 Documento = $Documento,
                                 TipoDocumento_id = $IdTipoDocumento,
-                                TarjetaProfecional = $TarjetaProfecional,
+                                TarjetaProfesional = $TarjetaProfesional,
                                 Especialidad = $IdEspecialidad,
                                 FechaNacimiento = '$FechaNacimiento',
                                 Cargos_id = $IdCargo,
