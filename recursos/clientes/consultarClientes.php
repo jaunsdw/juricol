@@ -5,23 +5,42 @@
     }else{
             
          if(!(isset($IdCliente)) || empty($IdCliente) ){
-            $sql="SELECT   C.Id as 'IdCliente',
-                            C.PrimerNombre,
-                            C.SegundoNombre,
-                            C.PrimerApellido,
-                            C.SegundoApellido,
-                            C.Documento,
-                            C.Telefono,
-                            C.Celular,
-                            C.Direccion,
-                            C.Correo,
-                            C.FechaNacimiento,
-                            ciudades.Descripcion as 'CiudadResidencia'    
-                        FROM clientes AS C
-                            INNER JOIN ciudades 
-                                ON C.CiudadResidencia_id = ciudades.Id
-                        WHERE C.FechaInhabilitacion IS NULL";
 
+            if ($Activo == "Si") {
+                $sql="SELECT   C.Id as 'IdCliente',
+                                C.PrimerNombre,
+                                C.SegundoNombre,
+                                C.PrimerApellido,
+                                C.SegundoApellido,
+                                C.Documento,
+                                C.Telefono,
+                                C.Celular,
+                                C.Direccion,
+                                C.Correo,
+                                C.FechaNacimiento,
+                                ciudades.Descripcion as 'CiudadResidencia'    
+                            FROM clientes AS C
+                                INNER JOIN ciudades 
+                                    ON C.CiudadResidencia_id = ciudades.Id
+                            WHERE C.FechaInhabilitacion IS NULL";
+            } else {
+                $sql="SELECT   C.Id as 'IdCliente',
+                                C.PrimerNombre,
+                                C.SegundoNombre,
+                                C.PrimerApellido,
+                                C.SegundoApellido,
+                                C.Documento,
+                                C.Telefono,
+                                C.Celular,
+                                C.Direccion,
+                                C.Correo,
+                                C.FechaNacimiento,
+                                ciudades.Descripcion as 'CiudadResidencia'    
+                            FROM clientes AS C
+                                INNER JOIN ciudades 
+                                    ON C.CiudadResidencia_id = ciudades.Id
+                            WHERE C.FechaInhabilitacion IS  NOT NULL";
+            }
          }else {
              $sql="SELECT Id as 'IdCliente',
                             PrimerNombre,
@@ -33,6 +52,7 @@
                             Telefono,
                             Celular,
                             Direccion,
+                            Estado,
                             CiudadResidencia_id AS 'IdCiudad',
                             Correo,
                             InstitucionLaboral_id AS 'IdInstitucionLaboral',
@@ -44,7 +64,7 @@
                             Parentesco_id AS 'IdParentesco',
                             FechaNacimiento   
                         FROM clientes
-                        WHERE Id = $IdCliente AND FechaInhabilitacion IS NULL";
+                        WHERE Id = $IdCliente";
          }
 
         $miConexion->EjecutarSQL($sql);

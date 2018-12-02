@@ -1,9 +1,9 @@
 
 <?php
 
-  // $fileName = $_SERVER["DOCUMENT_ROOT"]."/juricol/recursos/pdf/ESTADO3.pdf";
+   $fileName = $_SERVER["DOCUMENT_ROOT"]."/juricol/recursos/pdf/ESTADO3.pdf";
 
-   $fileName = $_FILES['MiArchivo']["tmp_name"];
+  // $fileName = $_FILES['MiArchivo']["tmp_name"];
     $reader = new \Asika\Pdf2text;
     $datosConvertidos = $reader->decode($fileName);
     if ($miConexion->GetCodigoRespuesta() == 503 ){
@@ -42,14 +42,7 @@
 
         $i = 0;
 
-        $demandasJuricol = array("IdDemanda"=>NULL,
-                                "NumDemanda"=>NULL,
-                                "Demandante"=>NULL,
-                                "Demandado"=>NULL,
-                                "Titular"=>NULL,
-                                "NuevoEstado"=>NULL,
-                                "FechaCambio"=>NULL,
-                                "DiasRestantes"=>NULL);
+        $demandasJuricol = array();
         $total = array();
 
         $juricol = NULL;
@@ -78,6 +71,7 @@
                     "FechaCambio"=>$fechaInicio->format('Y-m-d'),
                     "FechaLimite"=>$result['FechaLimite'],
                     "EstadoProbable"=>$result["EstadoProbable"],
+                    "Validacion"=>$result["Validacion"],
                     "Observacion"=>$result["Error"]);
 
                     array_push($total,$demandasJuricol);
@@ -116,7 +110,7 @@
 
     function calcularFechaLimite($fechaInicio,$estado,$miConexion,$diasEstados){
         
-        $result = array("EstadoProbable"=>NULL,"FechaLimite"=>NULL,"Error"=>NULL,"IdEstado"=>NULL);
+        $result = array("EstadoProbable"=>NULL,"FechaLimite"=>NULL,"Error"=>NULL,"IdEstado"=>NULL,"Validacion"=>FALSE);
 
         $fechaFin = new DateTime($fechaInicio);
 
@@ -134,12 +128,17 @@
                 $fechaFin->add(new DateInterval('P'.$diasEstados[$i]['DiasLimite'].'D'));
                 $result["FechaLimite"] = $fechaFin->format('Y-m-d');
                 $result["IdEstado"] = $diasEstados[$i]['Id'];
-                $result["Error"] = "Estado 100% complatible con el almacenamiento";
+                $result["Error"] = "Estado compatible";
+                $result["Validacion"] = TRUE;
                 $i++;
 
             }elseif($porcentaje >= 93){
                 $fechaFin->add(new DateInterval('P'.$diasEstados[$i]['DiasLimite'].'D'));
-                $result = array("EstadoProbable"=>$descripcion,"FechaLimite"=> $fechaFin->format('Y-m-d'),"IdEstado"=>$diasEstados[$i]['Id'],"Error"=>"El estado es $porcentaje % compatible con el almacenamiento");
+                $result = array("EstadoProbable"=>$descripcion,
+                                "FechaLimite"=> $fechaFin->format('Y-m-d'),
+                                "IdEstado"=>$diasEstados[$i]['Id'],
+                                "Error"=>"Estado sugerido",
+                                "Validacion"=>FALSE);
                 $i++;
             }else{
                 $i++;
@@ -149,6 +148,7 @@
 
         if( $result["EstadoProbable"] == NULL && $result["FechaLimite"] == NULL){
             $result["Error"] = "Estado no encontrado: ".$estado;
+            $result["IdEstado"] = 0;
         }
 
         return $result;   
@@ -165,7 +165,7 @@
                 FROM demandas AS D 
                     INNER JOIN empleados AS E
                         ON D.Titular_id = E.Id
-                WHERE	D.NumDemanda = '$NumDemanda'";
+                WHERE	D.NumDemanda = '$NumDemanda' AND D.Finalizada = 0";
 
         $miConexion->EjecutarSQL($sql);
                 
