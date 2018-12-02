@@ -100,13 +100,13 @@
 
                                     
                                         $error = $miConexion->GetError();
-                                        $respuesta->preparar(400, "Error al consultar ($sql)".$error);
+                                        var_dump(400, "Error al consultar ($sql)".$error);
 
 
                                     }else{
 
                                         $resultado = $miConexion->GetResultados();
-                                        $respuesta->preparar(200, $resultado);
+                                        var_dump(200, $resultado);
                             
                                     }
 
@@ -187,13 +187,13 @@
 
                                             
                                                 $error = $miConexion->GetError();
-                                                $respuesta->preparar(400, "Error al consultar ($sql)".$error);
+                                                var_dump(400, "Error al consultar ($sql)".$error);
 
 
                                             }else{
 
                                                 $resultado = $miConexion->GetResultados();
-                                                $respuesta->preparar(200, $resultado);
+                                                var_dump(200, $resultado);
                                     
                                             }
 
