@@ -5,8 +5,7 @@
     }else{
             
          if(!(isset($IdCliente)) || empty($IdCliente) ){
-
-            if ($Activo == "Si") {
+            if ($Activo == TRUE) {
                 $sql="SELECT   C.Id as 'IdCliente',
                                 C.PrimerNombre,
                                 C.SegundoNombre,
@@ -22,8 +21,8 @@
                             FROM clientes AS C
                                 INNER JOIN ciudades 
                                     ON C.CiudadResidencia_id = ciudades.Id
-                            WHERE C.FechaInhabilitacion IS NULL";
-            } else {
+                            WHERE C.Estado = 'Activo' ";
+            } elseif ($Activo == FALSE) {
                 $sql="SELECT   C.Id as 'IdCliente',
                                 C.PrimerNombre,
                                 C.SegundoNombre,
@@ -39,9 +38,25 @@
                             FROM clientes AS C
                                 INNER JOIN ciudades 
                                     ON C.CiudadResidencia_id = ciudades.Id
-                            WHERE C.FechaInhabilitacion IS  NOT NULL";
+                            WHERE C.Estado = 'Inactivo' ";
+            }else {
+                $sql="SELECT   C.Id as 'IdCliente',
+                                C.PrimerNombre,
+                                C.SegundoNombre,
+                                C.PrimerApellido,
+                                C.SegundoApellido,
+                                C.Documento,
+                                C.Telefono,
+                                C.Celular,
+                                C.Direccion,
+                                C.Correo,
+                                C.FechaNacimiento,
+                                ciudades.Descripcion as 'CiudadResidencia'    
+                            FROM clientes AS C
+                                INNER JOIN ciudades 
+                                    ON C.CiudadResidencia_id = ciudades.Id";
             }
-         }else {
+        }else {
              $sql="SELECT Id as 'IdCliente',
                             PrimerNombre,
                             SegundoNombre,
