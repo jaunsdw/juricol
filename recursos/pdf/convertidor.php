@@ -19,6 +19,7 @@
             $respuesta->responder();
         }else{
 
+            echo ("aqui");
             $totalDemandas = obtenerDemandas($datosConvertidos);
             $demandasJuricol = cambiosDeEstado($totalDemandas,$miConexion,$diasEstados);
             
@@ -96,22 +97,12 @@
                     FROM estadosDemandas";
 
         $miConexion->EjecutarSQL($sql);        
-                                    if ($miConexion->GetCodigoRespuesta() == 400){
-
-                                    
-                                        $error = $miConexion->GetError();
-                                        var_dump(400, "Error al consultar ($sql)".$error);
-
-
-                                    }else{
-
-                                        $resultado = $miConexion->GetResultados();
-                                        var_dump(200, $resultado);
-                            
-                                    }
-
-
+ 
         $resultado = $miConexion->GetResultados();
+
+        var_dump($resultado);
+
+       
 
         if( empty($resultado) || $resultado == NULL){
 
