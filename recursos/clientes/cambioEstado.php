@@ -13,7 +13,7 @@
             }
             
             $SQL = "UPDATE clientes  
-                           SET Estados = '$nuevoEstado'
+                           SET Estado = '$nuevoEstado'
                         WHERE Id = $IdCliente";
  
             $miConexion->EjecutarSQL($SQL); 
