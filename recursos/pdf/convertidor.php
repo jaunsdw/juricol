@@ -1,11 +1,12 @@
 
 <?php
 
-   //$fileName = $_SERVER["DOCUMENT_ROOT"]."/juricol/recursos/pdf/ESTADO3.pdf";
+   $fileName = $_SERVER["DOCUMENT_ROOT"]."/juricol/recursos/pdf/ESTADO3.pdf";
 
-  $fileName = $_FILES['MiArchivo']["tmp_name"];
+  //$fileName = $_FILES['MiArchivo']["tmp_name"];
     $reader = new \Asika\Pdf2text;
     $datosConvertidos = $reader->decode($fileName);
+
     if ($miConexion->GetCodigoRespuesta() == 503 ){
         $respuesta->preparar(503,"Servicio No disponible BD");
         $respuesta->responder();
