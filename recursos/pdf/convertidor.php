@@ -70,7 +70,7 @@
                     "NuevoEstado"=>$demandas[$i]['NuevoEstado'],
                     "FechaCambio"=>$fechaInicio->format('Y-m-d'),
                     "FechaLimite"=>$result['FechaLimite'],
-                    "EstadoProbable"=>$result["EstadoProbable"],
+                    "EstadoProbable"=>utf8_encode($result["EstadoProbable"]),
                     "Validacion"=>$result["Validacion"],
                     "Observacion"=>$result["Error"]);
 
@@ -110,7 +110,7 @@
 
     function calcularFechaLimite($fechaInicio,$estado,$miConexion,$diasEstados){
         
-        $result = array("EstadoProbable"=>NULL,"FechaLimite"=>NULL,"Error"=>NULL,"IdEstado"=>NULL,"Validacion"=>NULL);
+        $result = array("EstadoProbable"=>NULL,"FechaLimite"=>NULL,"Error"=>NULL,"IdEstado"=>NULL,"Validacion"=>FALSE);
 
         $fechaFin = new DateTime($fechaInicio);
 
@@ -129,7 +129,7 @@
                 $result["FechaLimite"] = $fechaFin->format('Y-m-d');
                 $result["IdEstado"] = $diasEstados[$i]['Id'];
                 $result["Error"] = "Estado compatible";
-                $result["Validacion"] = "Si";
+                $result["Validacion"] = TRUE;
                 $i++;
 
             }elseif($porcentaje >= 93){
@@ -138,7 +138,7 @@
                                 "FechaLimite"=> $fechaFin->format('Y-m-d'),
                                 "IdEstado"=>$diasEstados[$i]['Id'],
                                 "Error"=>"Estado sugerido",
-                                "Validacion"=> "No");
+                                "Validacion"=> FALSE);
                 $i++;
             }else{
                 $i++;
