@@ -9,7 +9,13 @@
         $respuesta->preparar(503,"Servicio No disponible BD");
     }else{
 
-        $sql="SELECT * FROM usuarios WHERE Usuario = $usuario"; // Consulta a realizar 
+        $sql="SELECT 	S.Id as 'Id',
+                        S.Password  as 'Password',
+                        TPU.Descripcion as 'TipoUsuario'
+                FROM usuarios AS S
+                    INNER JOIN tiposusuarios AS TPU
+                        ON TPU.Id = S.TiposUsuarios_id
+                WHERE Usuario = $usuario"; // Consulta a realizar 
 
         $miConexion->EjecutarSQL($sql); // Metodo que realiza la consulta a la base de datos  
         
@@ -28,7 +34,7 @@
                 $respuesta->preparar(404,"contaseña error"); 
                 }else{
                     $respuesta->preparar(200,"Acceso correcto");
-                    $datos = array('usuario' => $usuario,'IdUsuario'=> $resultado[0]['Id']);
+                    $datos = array('usuario' => $usuario,'IdUsuario'=> $resultado[0]['Id'],'TipoUsuario'=> $resultado[0]['TipoUsuario']);
                     $miToken->prepararToken($datos);
                 }   
         }

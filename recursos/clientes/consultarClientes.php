@@ -5,7 +5,7 @@
     }else{
             
          if(!(isset($IdCliente)) || empty($IdCliente) ){
-            if ($Activo == TRUE) {
+            if ($Activo === true) {
                 $sql="SELECT   C.Id as 'IdCliente',
                                 C.PrimerNombre,
                                 C.SegundoNombre,
@@ -16,13 +16,14 @@
                                 C.Celular,
                                 C.Direccion,
                                 C.Correo,
+                                C.Estado,
                                 C.FechaNacimiento,
                                 ciudades.Descripcion as 'CiudadResidencia'    
                             FROM clientes AS C
                                 INNER JOIN ciudades 
                                     ON C.CiudadResidencia_id = ciudades.Id
                             WHERE C.Estado = 'Activo' ";
-            } elseif ($Activo == FALSE) {
+            } elseif ($Activo === false) {
                 $sql="SELECT   C.Id as 'IdCliente',
                                 C.PrimerNombre,
                                 C.SegundoNombre,
@@ -33,6 +34,7 @@
                                 C.Celular,
                                 C.Direccion,
                                 C.Correo,
+                                C.Estado,
                                 C.FechaNacimiento,
                                 ciudades.Descripcion as 'CiudadResidencia'    
                             FROM clientes AS C
@@ -50,6 +52,7 @@
                                 C.Celular,
                                 C.Direccion,
                                 C.Correo,
+                                C.Estado,
                                 C.FechaNacimiento,
                                 ciudades.Descripcion as 'CiudadResidencia'    
                             FROM clientes AS C

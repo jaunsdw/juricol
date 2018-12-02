@@ -4,17 +4,17 @@
         }
         else{              
             
-            $estadoActual = verificarEstadoActual($IdEmpleado,$miConexion);
+            $estadoActual = verificarEstadoActual($IdCliente,$miConexion);
             
             if ($estadoActual == "Activo") {
-                $nuevoEstado =  "Desactivo";
+                $nuevoEstado =  "Inactivo";
             } else {
                 $nuevoEstado = "Activo";
             }
             
-            $SQL = "UPDATE empleados  
+            $SQL = "UPDATE clientes  
                            SET Estados = '$nuevoEstado'
-                        WHERE Id = $IdEmpleado";
+                        WHERE Id = $IdCliente";
  
             $miConexion->EjecutarSQL($SQL); 
 
@@ -38,14 +38,14 @@
 
 
 
-    function verificarEstadoActual($IdEmpleado,$miConexion){
+    function verificarEstadoActual($IdCliente,$miConexion){
 
-        $SQL = "SELECT Estados FROM empleados WHERE Id = $IdEmpleado";
+        $SQL = "SELECT Estado FROM clientes WHERE Id = $IdCliente";
  
         $miConexion->EjecutarSQL($SQL); 
 
             $resultado = $miConexion->GetResultados();
-            $estadoActual = $resultado[0]['Estados'];
+            $estadoActual = $resultado[0]['Estado'];
             return $estadoActual;
         
     }

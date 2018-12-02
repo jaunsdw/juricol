@@ -194,7 +194,7 @@
             case 'DELETE':
                 switch ($accion) {
                     case 'eliminarCliente':
-                        require_once("clientes/eliminarCliente.php");
+                        require_once("clientes/cambioEstado.php");
                         break;
                     case 'eliminarEmpleado':
                         require_once("empleados/eliminarEmpleado.php");
