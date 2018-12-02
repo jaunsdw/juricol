@@ -18,8 +18,6 @@
             $respuesta->preparar(200,"No hay estados registrados");
             $respuesta->responder();
         }else{
-
-            echo ("aqui");
             $totalDemandas = obtenerDemandas($datosConvertidos);
             $demandasJuricol = cambiosDeEstado($totalDemandas,$miConexion,$diasEstados);
             
@@ -100,10 +98,6 @@
  
         $resultado = $miConexion->GetResultados();
 
-        var_dump($resultado);
-
-       
-
         if( empty($resultado) || $resultado == NULL){
 
             return NULL;
@@ -116,7 +110,7 @@
 
     function calcularFechaLimite($fechaInicio,$estado,$miConexion,$diasEstados){
         
-        $result = array("EstadoProbable"=>NULL,"FechaLimite"=>NULL,"Error"=>NULL,"IdEstado"=>NULL,"Validacion"=>FALSE);
+        $result = array("EstadoProbable"=>NULL,"FechaLimite"=>NULL,"Error"=>NULL,"IdEstado"=>NULL,"Validacion"=>NULL);
 
         $fechaFin = new DateTime($fechaInicio);
 
@@ -135,7 +129,7 @@
                 $result["FechaLimite"] = $fechaFin->format('Y-m-d');
                 $result["IdEstado"] = $diasEstados[$i]['Id'];
                 $result["Error"] = "Estado compatible";
-                $result["Validacion"] = TRUE;
+                $result["Validacion"] = "Si";
                 $i++;
 
             }elseif($porcentaje >= 93){
@@ -144,7 +138,7 @@
                                 "FechaLimite"=> $fechaFin->format('Y-m-d'),
                                 "IdEstado"=>$diasEstados[$i]['Id'],
                                 "Error"=>"Estado sugerido",
-                                "Validacion"=>FALSE);
+                                "Validacion"=> "No");
                 $i++;
             }else{
                 $i++;
@@ -174,19 +168,6 @@
                 WHERE	D.NumDemanda = '$NumDemanda' AND D.Finalizada = 0";
 
         $miConexion->EjecutarSQL($sql);
-                                            if ($miConexion->GetCodigoRespuesta() == 400){
-
-                                            
-                                                $error = $miConexion->GetError();
-                                                var_dump(400, "Error al consultar ($sql)".$error);
-
-
-                                            }else{
-
-                                                $resultado = $miConexion->GetResultados();
-                                                var_dump(200, $resultado);
-                                    
-                                            }
 
         $resultado = $miConexion->GetResultados();
 
