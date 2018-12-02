@@ -70,7 +70,7 @@
                     "NuevoEstado"=>$demandas[$i]['NuevoEstado'],
                     "FechaCambio"=>$fechaInicio->format('Y-m-d'),
                     "FechaLimite"=>$result['FechaLimite'],
-                    "EstadoProbable"=>utf8_encode($result["EstadoProbable"]),
+                    "EstadoProbable"=>utf8_decode($result["EstadoProbable"]),
                     "Validacion"=>$result["Validacion"],
                     "Observacion"=>$result["Error"]);
 
