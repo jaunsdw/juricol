@@ -96,6 +96,20 @@
                     FROM estadosDemandas";
 
         $miConexion->EjecutarSQL($sql);        
+                                    if ($miConexion->GetCodigoRespuesta() == 400){
+
+                                    
+                                        $error = $miConexion->GetError();
+                                        $respuesta->preparar(400, "Error al consultar ($sql)".$error);
+
+
+                                    }else{
+
+                                        $resultado = $miConexion->GetResultados();
+                                        $respuesta->preparar(200, $resultado);
+                            
+                                    }
+
 
         $resultado = $miConexion->GetResultados();
 
@@ -169,7 +183,20 @@
                 WHERE	D.NumDemanda = '$NumDemanda' AND D.Finalizada = 0";
 
         $miConexion->EjecutarSQL($sql);
-                
+                                            if ($miConexion->GetCodigoRespuesta() == 400){
+
+                                            
+                                                $error = $miConexion->GetError();
+                                                $respuesta->preparar(400, "Error al consultar ($sql)".$error);
+
+
+                                            }else{
+
+                                                $resultado = $miConexion->GetResultados();
+                                                $respuesta->preparar(200, $resultado);
+                                    
+                                            }
+
         $resultado = $miConexion->GetResultados();
 
         if( empty($resultado) || $resultado == NULL){
