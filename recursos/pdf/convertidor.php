@@ -132,7 +132,7 @@
                 $result["Validacion"] = TRUE;
                 $i++;
 
-            }elseif($porcentaje >= 93){
+            }elseif($porcentaje > 85){
                 $fechaFin->add(new DateInterval('P'.$diasEstados[$i]['DiasLimite'].'D'));
                 $result = array("EstadoProbable"=>$descripcion,
                                 "FechaLimite"=> $fechaFin->format('Y-m-d'),
