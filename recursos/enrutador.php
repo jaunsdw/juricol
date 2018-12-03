@@ -60,6 +60,9 @@
                     case 'demandasDeEmpleados':
                         require_once("reportes/demandasDeEmpleados.php");
                         break;
+                    case 'consultarRoles':
+                        require_once("roles/consultarRoles.php");
+                        break;
                     default:
                         $respuesta->preparar(404, "Accion no existe");
                         $respuesta->responder();
