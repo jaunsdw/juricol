@@ -1,8 +1,7 @@
 <?php
-  include "demandasDeEmpleados.php";
+  include "demandasPorJuzgado.php";
   $hoy = getdate();
 
-  
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,11 +21,11 @@
     <div id="contenedor">
         <header>
             <center>
-                <h1>Demandas asignadas a abogados</h1>
+                <h1>Demandas en juzgados</h1>
                 <h3 ><?php echo $hoy['weekday']." ".$hoy['mday']." de ".$hoy['month']." del ".$hoy['year'] ;  ?></h3>
             </center>
-            <p id="descripcion">En cada sección se observa como titulo el nombre del empleado asignado a las demandas y su información de contacto, 
-                    además en la sección inferior a el mismo encontramos las demandas y su información general</p>
+            <p id="descripcion">En cada sección se observa como titulo el nombre del juzgado al que pertenecen las demandas, 
+                    además en la sección inferior encontramos las demandas y su información general</p>
         </header>
         <?php
             $numGeneral = count($datos);
@@ -36,16 +35,9 @@
             while ($iG < $numGeneral) {
               echo "<br>";
               echo "<div class='card'>
-                          <h5 class='card-header'>
-                            <p class='abogado-info'>".
-                              $datos[$iG]['Empleado']['Nombre'].
-                              "<br>".
-                              $datos[$iG]['Empleado']['Rango'].
-                            "</p>". 
-                            "<p class='abogado-contacto'>".
-                              $datos[$iG]['Empleado']['Celular'].
-                              "<br>".
-                              $datos[$iG]['Empleado']['Correo'].
+                            <h5 class='card-header'>    
+                            <p class='juzgado-info'>".
+                              $datos[$iG]['Juzgado']['Nombre'].
                             "</p>". 
                           "</h5>
                           <div class='card-body'>
@@ -59,7 +51,6 @@
                                           <th scope='col'>Descripción</th>
                                           <th scope='col'>Estado Actual</th>
                                           <th scope='col'>Categoria</th>
-                                          <th scope='col'>Juzgado</th>
                                           <th scope='col'>Tipo de proceso</th>
                                           
                                         </tr>
@@ -76,7 +67,6 @@
                                             "<td>".$datos[$iG]['Demandas'][$iE]['DescripcionDemanda']."</td>".
                                             "<td>".$datos[$iG]['Demandas'][$iE]['NombreEstadoProceso']."</td>".
                                             "<td>".$datos[$iG]['Demandas'][$iE]['Categoria']."</td>".
-                                            "<td>".$datos[$iG]['Demandas'][$iE]['NombreJuzgado']."</td>".
                                             "<td>".$datos[$iG]['Demandas'][$iE]['NombreTipoProceso']."</td>".
                                             
                                           "</tr>";

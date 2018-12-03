@@ -1,5 +1,5 @@
 <?php
-  include "demandasDeEmpleados.php";
+  include "demandasPorTipoProceso.php";
   $hoy = getdate();
 
   
@@ -25,7 +25,7 @@
                 <h1>Demandas asignadas a abogados</h1>
                 <h3 ><?php echo $hoy['weekday']." ".$hoy['mday']." de ".$hoy['month']." del ".$hoy['year'] ;  ?></h3>
             </center>
-            <p id="descripcion">En cada sección se observa como titulo el nombre del empleado asignado a las demandas y su información de contacto, 
+            <p id="descripcion">En cada sección se observa como titulo el nombre del Tipo de proceso asignado a las demandas, 
                     además en la sección inferior a el mismo encontramos las demandas y su información general</p>
         </header>
         <?php
@@ -37,15 +37,8 @@
               echo "<br>";
               echo "<div class='card'>
                           <h5 class='card-header'>
-                            <p class='abogado-info'>".
-                              $datos[$iG]['Empleado']['Nombre'].
-                              "<br>".
-                              $datos[$iG]['Empleado']['Rango'].
-                            "</p>". 
-                            "<p class='abogado-contacto'>".
-                              $datos[$iG]['Empleado']['Celular'].
-                              "<br>".
-                              $datos[$iG]['Empleado']['Correo'].
+                          <p class='juzgado-info'>".
+                          $datos[$iG]['TipoDeProceso']['Nombre'].
                             "</p>". 
                           "</h5>
                           <div class='card-body'>
@@ -60,7 +53,7 @@
                                           <th scope='col'>Estado Actual</th>
                                           <th scope='col'>Categoria</th>
                                           <th scope='col'>Juzgado</th>
-                                          <th scope='col'>Tipo de proceso</th>
+ 
                                           
                                         </tr>
                                       </thead>
@@ -77,7 +70,6 @@
                                             "<td>".$datos[$iG]['Demandas'][$iE]['NombreEstadoProceso']."</td>".
                                             "<td>".$datos[$iG]['Demandas'][$iE]['Categoria']."</td>".
                                             "<td>".$datos[$iG]['Demandas'][$iE]['NombreJuzgado']."</td>".
-                                            "<td>".$datos[$iG]['Demandas'][$iE]['NombreTipoProceso']."</td>".
                                             
                                           "</tr>";
   

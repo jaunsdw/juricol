@@ -11,20 +11,18 @@
     if ($miConexion->GetCodigoRespuesta() == 503 ){
         $respuesta->preparar(503,"Servicio No disponible BD");
     }else{
-      
+        
+
        if (!(isset($IdJuzgado)) || empty($IdJuzgado)) {
             $juzgados = obtenerjuzgados(NULL,$miConexion);
        } else {
             $juzgados = obtenerjuzgados($IdJuzgado,$miConexion);
        }
         
- 
 
        $datos = obtenerDemandasPorJuzgados($juzgados,$miConexion); 
 
-       echo "<pre>";
-       var_dump($datos);
-       echo "</pre>";
+ 
     }
 
 
@@ -59,7 +57,7 @@
                             INNER JOIN tipoprocesos AS TP
                                 ON TP.Id = D.Tiposprocesos_id
                         WHERE D.Juzgado_id = $Id ";
-                        
+
             $miConexion->EjecutarSQL($sql);
             $resultado = $miConexion->GetResultados();
             
@@ -69,9 +67,7 @@
 
             array_push($datos,$Temporales);
             
-            
-            
-            
+
             $i++;
 
         }

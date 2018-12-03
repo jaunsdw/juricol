@@ -1,6 +1,6 @@
 <?php
-    require_once("../../servicios/conexionbd.php");  
-    require_once("../../servicios/controlrespuesta.php");  // Llamado al servicio "controlrespuesta", quien es el encargado de administrar
+    require_once("conexionbd.php");  
+    require_once("controlrespuesta.php");  // Llamado al servicio "controlrespuesta", quien es el encargado de administrar
     // las respuestas que retornen todos los recursos
     $resultado = NULL;  // Inicio de variable para resultados 
     $miConexion = new ConexionBD; // Instancia de la clase ConeccionBD

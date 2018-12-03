@@ -1,13 +1,14 @@
 <?php 
 
-require_once '../../vendor/autoload.php';
-use Spipu\Html2Pdf\Html2Pdf;
+require_once __DIR__ . '../../../vendor/autoload.php';
 
-$html2pdf = new Html2Pdf();
-$link =  $_SERVER["DOCUMENT_ROOT"]."/juricol/reportes/RdemandasDeEmpleados.php";
-$html2pdf->writeHTML( );
-$html2pdf->output();
 
+$mpdf = new \Mpdf\Mpdf();
+ob_start();
+include $_SERVER["DOCUMENT_ROOT"]."/juricol/recursos/reportes/RdemandasDeEmpleados.php";
+$content  =  ob_get_clean();
+$mpdf->WriteHTML($content);
+$mpdf->Output();
 
 ?>
 
