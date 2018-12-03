@@ -147,7 +147,7 @@
         }
 
         if( $result["EstadoProbable"] == NULL && $result["FechaLimite"] == NULL){
-            $result["Error"] = "Estado no encontrado: ";
+            $result["Error"] = "Estado no encontrado";
             $result["IdEstado"] = 0;
         }
 

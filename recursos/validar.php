@@ -81,7 +81,8 @@
         $miConexion = new ConexionBD; // Instancia de la clase ConeccionBD
         $respuesta = new ControlRespuesta($miConexion); // instancia de la clase ControlRespuesta
         $miConexion->Conectar(); // Metodo que ejecuta la conexion con la base de datos
-      
+         
+        
      
 
 

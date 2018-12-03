@@ -69,7 +69,8 @@
                                 ON J.Id = D.Juzgado_id
                             INNER JOIN tipoprocesos AS TP
                                 ON TP.Id = D.Tiposprocesos_id
-                        WHERE (D.Titular_id = $IdEmpleado OR D.Suplente_id = $IdEmpleado) AND D.Finalizada = 0 ";
+                        WHERE D.Titular_id = $IdEmpleado OR D.Suplente_id = $IdEmpleado
+                        ORDER BY D.Id ASC";
             }
     
         }else {
