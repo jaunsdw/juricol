@@ -1,6 +1,6 @@
 <?php
 
-if ($miConexion->GetCodigoRespuesta() == 503 ){
+    if ($miConexion->GetCodigoRespuesta() == 503 ){
         $respuesta->preparar(503,"Servicio No disponible BD");
     }else{
 
@@ -31,21 +31,20 @@ if ($miConexion->GetCodigoRespuesta() == 503 ){
             if ($miConexion->GetCodigoRespuesta() == 400){
                 $error = $miConexion->GetError();
                 $respuesta->preparar(400, "Error al consultar ($sql)".$error);
-                $respuesta->responder(); 
             }else{
 
 
                 $email =  enviarEmail($CorreoElectronico,$pass);
-                $respuesta->preparar($email['codigo'],$email['mensaje']);
-                $respuesta->responder(); 
-
-
                 $resultado = $miConexion->ConsultarIdInsertado();
-                $respuesta->preparar(200,"Id insertado ".$resultado);
-                $respuesta->responder();  
+                $respuesta->preparar(200,"Usuario creado N° ".$resultado." y ".$email['mensaje']);
+            
  
             }
+
+
         }
+
+        $respuesta->responder();  
 
     }
 

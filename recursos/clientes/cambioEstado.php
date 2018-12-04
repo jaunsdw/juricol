@@ -6,29 +6,38 @@
             
             $estadoActual = verificarEstadoActual($IdCliente,$miConexion);
             $demandas = verificarDemandas($IdCliente,$miConexion);
-            
-            if ($estadoActual == "Activo") {
-                $nuevoEstado =  "Inactivo";
+
+            if (condition) {
+
+                if ($estadoActual == "Activo") {
+                    $nuevoEstado =  "Inactivo";
+                } else {
+                    $nuevoEstado = "Activo";
+                }
+                
+                $SQL = "UPDATE clientes  
+                            SET Estado = '$nuevoEstado'
+                            WHERE Id = $IdCliente";
+    
+                $miConexion->EjecutarSQL($SQL); 
+
+                if ( $miConexion->GetCodigoRespuesta() == 400 ) {   
+                    $error = $miConexion->GetError();
+                    $respuesta->preparar(400, "Error al consultar (".$SQL.") ".$error);
+                    
+                }
+                else{                                      
+
+                    $respuesta->preparar(200,$miConexion->ConsultarModificaciones());
+                    
+                }
+
             } else {
-                $nuevoEstado = "Activo";
+                    $respuesta->preparar(404,"El cliente tiene demandas activas");
             }
             
-            $SQL = "UPDATE clientes  
-                           SET Estado = '$nuevoEstado'
-                        WHERE Id = $IdCliente";
- 
-            $miConexion->EjecutarSQL($SQL); 
+            
 
-            if ( $miConexion->GetCodigoRespuesta() == 400 ) {   
-                $error = $miConexion->GetError();
-                $respuesta->preparar(400, "Error al consultar (".$SQL.") ".$error);
-                
-            }
-            else{                                      
-
-                $respuesta->preparar(200,$miConexion->ConsultarModificaciones());
-                
-            }
 
         }
 
@@ -37,6 +46,9 @@
 
 
 
+    function verificarDemandas($IdCliente,$miConexion){
+        
+    }
 
 
     function verificarEstadoActual($IdCliente,$miConexion){
