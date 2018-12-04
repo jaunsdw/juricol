@@ -50,26 +50,48 @@
                                     ON J.Id = D.Juzgado_id ";
             } else {
                 $sql="SELECT 
-                            D.Id AS 'IdDemanda',
-                            CONCAT(C.PrimerNombre,' ',C.SegundoNombre,' ',C.PrimerApellido,' ',C.SegundoApellido) as 'NombreCliente',
-                            D.NumDemanda AS 'NumDemanda',
-                            TPS.Descripcion AS 'NombreTipoDemanda',
-                            D.Descripcion AS 'DescripcionDemanda',
-                            ESP.Descripcion AS 'NombreEstadoProceso',
-                            J.Descripcion AS 'NombreJuzgado',
-                            TP.Descripcion AS 'NombreTipoProceso',
-                            IF(D.Finalizada = 1,'Si','No') AS 'Finalizacion'
-                        FROM demandas AS D
-                            INNER JOIN clientes as C
-                                ON C.Id = D.Clientes_id
-                            INNER JOIN tiposdemandas AS TPS
-                                ON	TPS.Id = D.TiposDemandas_id
-                            INNER JOIN estadosprocesos AS ESP
-                                ON ESP.Id = D.EstadosProcesos_id
-                            INNER JOIN juzgados AS J
-                                ON J.Id = D.Juzgado_id
-                            INNER JOIN tipoprocesos AS TP
-                                ON TP.Id = D.Tiposprocesos_id
+                                D.Id AS 'IdDemanda',
+                                CONCAT(C.PrimerNombre,' ',C.SegundoNombre,' ',C.PrimerApellido,' ',C.SegundoApellido) as 'NombreCliente',
+                                D.NumDemanda AS 'NumDemanda',
+                                TPS.Descripcion AS 'NombreTipoDemanda',
+                                CONCAT(E1.PrimerNombre,' ',E1.SegundoNombre,' ',E1.PrimerApellido,' ',E1.SegundoApellido) as 'NombreTitular',
+                                IF(D.Finalizada = 1,'Si','No') AS 'Finalizacion',
+                                ESP.Descripcion AS 'NombreEstadoProceso',
+                                            TPP.Descripcion AS 'NombreTipoProceso',
+                                            J.Descripcion AS 'NombreJuzgado',
+                                (SELECT  ED.Descripcion
+                                    FROM movimientos AS M
+                                        INNER JOIN estadosdemandas AS ED
+                                            ON M.EstadosDemandas_id = ED.Id
+                                    WHERE FechaMovimiento = (SELECT  max(FechaMovimiento)
+                                                                                FROM movimientos 
+                                                                                WHERE Demandas_id = D.Id) && M.Demandas_id = D.Id) AS 'UltimoMovimiento',
+                                (SELECT  FechaMovimiento
+                                    FROM movimientos 
+                                    WHERE FechaMovimiento = (SELECT  max(FechaMovimiento)
+                                                                                FROM movimientos 
+                                                                                WHERE Demandas_id = D.Id) && Demandas_id = D.Id) AS 'FechaMovimiento',
+                                (SELECT  FechaLimite
+                                    FROM movimientos 
+                                    WHERE FechaMovimiento = (SELECT  max(FechaMovimiento)
+                                                                                FROM movimientos 
+                                                                                WHERE Demandas_id = D.Id) && Demandas_id = D.Id) AS 'FechaLimite'
+                        
+                            FROM demandas AS D
+                                INNER JOIN clientes as C
+                                    ON C.Id = D.Clientes_id
+                                INNER JOIN tiposdemandas AS TPS
+                                    ON	TPS.Id = D.TiposDemandas_id
+                                INNER JOIN empleados as E1 
+                                    ON E1.Id = D.Titular_id
+                                INNER JOIN empleados AS E2
+                                    ON E2.Id = D.Suplente_id
+                                INNER JOIN estadosprocesos AS ESP
+                                    ON ESP.Id = D.EstadosProcesos_id
+                                INNER JOIN tipoprocesos AS TPP
+                                    ON TPP.Id = D.TiposProcesos_id
+                                INNER JOIN juzgados AS J 
+                                    ON J.Id = D.Juzgado_id
                         WHERE D.Titular_id = $IdEmpleado OR D.Suplente_id = $IdEmpleado
                         ORDER BY D.Id ASC";
             }
