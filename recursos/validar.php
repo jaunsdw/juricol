@@ -4,7 +4,6 @@
     header("Access-Control-Allow-Methods: *");
 
     
-
     if($_SERVER['REQUEST_METHOD'] == "OPTIONS"){
 
     }else{
