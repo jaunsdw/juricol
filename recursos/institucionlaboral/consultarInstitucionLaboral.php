@@ -5,7 +5,13 @@
     }else{
 
         if(!(isset($IdCiudad)) || empty($IdCiudad) ){
-            $sql="SELECT * FROM institucionlaboral WHERE FechaInhabilitacion IS NULL";
+            $sql="SELECT    institucionlaboral.Id as 'Id',
+                            institucionlaboral.Descripcion as 'Descripcion',
+                            ciudades.Descripcion as 'NombreCiudad'
+                    FROM institucionlaboral 
+                        INNER JOIN ciudades
+                            ON institucionlaboral.Ciudad_id = ciudades.Id
+                        WHERE institucionlaboral.FechaInhabilitacion IS NULL";
         }else {
             $sql="SELECT * FROM institucionlaboral WHERE Ciudad_id = $IdCiudad AND FechaInhabilitacion IS NULL";
         }
