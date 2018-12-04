@@ -12,12 +12,13 @@
         $sql="SELECT 	S.Id as 'Id',
                         S.Password  as 'Password',
                         TPU.Descripcion as 'TipoUsuario',
-                        CONCAT(E.PrimerNombre,' ',E.SegundoNombre,' ',E.PrimerApellido,' ',E.SegundoApellido) as 'NombreEmpleado'
+                        CONCAT(E.PrimerNombre,' ',E.SegundoNombre,' ',E.PrimerApellido,' ',E.SegundoApellido) as 'NombreEmpleado',
+                        S.Empleados_id as 'IdEmpleado'
                FROM usuarios AS S
                    INNER JOIN tiposusuarios AS TPU
                        ON TPU.Id = S.TiposUsuarios_id
                      INNER JOIN empleados AS E
-                         ON E.Id = S.Empleados_id
+                        ON E.Id = S.Empleados_id OR S.Empleados_id IS NULL
                 WHERE Usuario = $usuario"; // Consulta a realizar 
 
         $miConexion->EjecutarSQL($sql); // Metodo que realiza la consulta a la base de datos  
@@ -36,9 +37,17 @@
             }elseif(!($resultado["0"]["Password"] == $password)){  // Verificacion de contraseña del usuario 
                 $respuesta->preparar(404,"contaseña error"); 
                 }else{
-                    $respuesta->preparar(200,"Acceso correcto");
-                    $datos = array('usuario' => $usuario,'IdUsuario'=> $resultado[0]['Id'],'TipoUsuario'=> $resultado[0]['TipoUsuario'],'NombreEmpleado'=>$resultado[0]['NombreEmpleado'] );
-                    $miToken->prepararToken($datos);
+                    if ($resultado[0]['IdEmpleado']) == NULL {
+                        $respuesta->preparar(200,"Acceso correcto");
+                        $datos = array('usuario' => $usuario,'IdUsuario'=> $resultado[0]['Id'],'TipoUsuario'=> $resultado[0]['TipoUsuario'],'NombreEmpleado'=>'Administrador del sistema' );
+                        $miToken->prepararToken($datos);
+                    } else {
+                        $respuesta->preparar(200,"Acceso correcto");
+                        $datos = array('usuario' => $usuario,'IdUsuario'=> $resultado[0]['Id'],'TipoUsuario'=> $resultado[0]['TipoUsuario'],'NombreEmpleado'=>$resultado[0]['NombreEmpleado'] );
+                        $miToken->prepararToken($datos);
+                    }
+                    
+
                 }   
         }
     }
