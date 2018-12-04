@@ -3,7 +3,7 @@
         $respuesta->preparar(503,"Servicio No disponible BD");
     }else{
             
-        if(!(isset($IdDemanda)) || empty($IdDemanda) || $IdDemanda == NULL ){
+        if(!(isset($IdDemanda)) || empty($IdDemanda)){
             if (!(isset($IdEmpleado)) || empty($IdEmpleado) || $IdEmpleado == NULL ) {
                     $sql="SELECT 
                                 D.Id AS 'IdDemanda',
