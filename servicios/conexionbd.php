@@ -39,7 +39,7 @@
         
         // Metodo que obtiene la informacion de las filas afectadas por una consulta 
         public function ConsultarModificaciones(){
-            return $this->conexion->info;
+            return $this->conexion->affected_rows;
         }
         
 
