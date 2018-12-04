@@ -1,6 +1,4 @@
 <?php
-
-
     if ($miConexion->GetCodigoRespuesta() == 503 ){
         $respuesta->preparar(503,"Servicio No disponible BD");
     }else{
@@ -74,22 +72,32 @@
             $error = $miConexion->GetError();
             $respuesta->preparar(400, "Error al consultar ($sql)".$error);
         }else{
+
             $resultado = $miConexion->GetResultados();
             $i = 0;
             $num = count($resultado);
             while ($i < $num) { 
                 $Empleado_id = $resultado[$i]['IdEmpleado'];
 
-                $sql="SELECT * FROM usuarios
-                WHERE Empleados_id = $Empleado_id ";
+                $sql="SELECT
+                            TU.Id AS 'IdRol',
+                            TU.Descripcion AS 'NombreRol' 
+                        FROM usuarios AS U
+                            INNER JOIN tiposusuarios as TU
+                                ON TU.Id = U.TiposUsuarios_id
+                        WHERE U.Empleados_id = $Empleado_id ";
 
                 $miConexion->EjecutarSQL($sql);
                 $usuarios = $miConexion->GetResultados();
             
                 if (empty($usuarios)) {
                     $resultado[$i]['Usuario']= "No";
+                    $resultado[$i]['IdRol']=  NULL;
+                    $resultado[$i]['NombreRol']= NULL;
                 }else {
                     $resultado[$i]['Usuario']= "Si";
+                    $resultado[$i]['IdRol']=  $usuarios[0]['IdRol'];
+                    $resultado[$i]['NombreRol']=  $usuarios[0]['NombreRol'];
                 }
                 $i++;
             }
