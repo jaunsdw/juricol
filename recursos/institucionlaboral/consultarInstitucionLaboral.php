@@ -7,6 +7,7 @@
         if(!(isset($IdCiudad)) || empty($IdCiudad) ){
             $sql="SELECT    institucionlaboral.Id as 'Id',
                             institucionlaboral.Descripcion as 'Descripcion',
+                            ciudades.Id as 'IdCiudad',
                             ciudades.Descripcion as 'NombreCiudad'
                     FROM institucionlaboral 
                         INNER JOIN ciudades
