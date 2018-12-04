@@ -43,7 +43,7 @@
                         $miToken->prepararToken($datos);
                     } else {
                         $respuesta->preparar(200,"Acceso correcto");
-                        $datos = array('usuario' => $usuario,'IdUsuario'=> $resultado[0]['Id'],'TipoUsuario'=> $resultado[0]['TipoUsuario'],'NombreEmpleado'=>$resultado[0]['NombreEmpleado'] );
+                        $datos = array('usuario' => $usuario,'IdUsuario'=> $resultado[0]['Id'],'TipoUsuario'=> $resultado[0]['TipoUsuario'],'NombreEmpleado'=>$resultado[0]['NombreEmpleado'],'IdEmpleado'=>$resultado[0]['IdEmpleado'] );
                         $miToken->prepararToken($datos);
                     }
                     
