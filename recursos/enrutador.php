@@ -242,7 +242,7 @@
                         require_once("tiposdocumentos/eliminarTipoDocumento.php");
                         break;
                     case 'eliminarTipoProceso':
-                        require_once("tiposdprocesos/eliminarTipoProceso.php");
+                        require_once("tiposprocesos/eliminarTipoProceso.php");
                         break;
                     default:
                         $respuesta->preparar(404, "Accion no existe");
