@@ -130,9 +130,10 @@
                 $result["IdEstado"] = $diasEstados[$i]['Id'];
                 $result["Error"] = "Estado compatible";
                 $result["Validacion"] = TRUE;
-                $i++;
+                $result["EstadoProbable"] = NULL;
+                $i = $num + $i;
 
-            }elseif($porcentaje > 85){
+            }elseif($porcentaje > 90){
                 $fechaFin->add(new DateInterval('P'.$diasEstados[$i]['DiasLimite'].'D'));
                 $result = array("EstadoProbable"=>$descripcion,
                                 "FechaLimite"=> $fechaFin->format('Y-m-d'),
