@@ -4,7 +4,9 @@
     }else{
             
         if(!(isset($IdDemanda)) || empty($IdDemanda)){
-            if (!(isset($IdEmpleado)) || empty($IdEmpleado) || $IdEmpleado == NULL ) {
+
+            if (!(isset($IdEmpleado)) || empty($IdEmpleado) || $IdEmpleado == 0 ) {
+
                     $sql="SELECT 
                                 D.Id AS 'IdDemanda',
                                 CONCAT(C.PrimerNombre,' ',C.SegundoNombre,' ',C.PrimerApellido,' ',C.SegundoApellido) as 'NombreCliente',
