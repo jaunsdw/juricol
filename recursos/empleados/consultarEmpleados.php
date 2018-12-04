@@ -93,11 +93,11 @@
                 if (empty($usuarios)) {
                     $resultado[$i]['Usuario']= "No";
                     $resultado[$i]['IdRol']=  NULL;
-                    $resultado[$i]['NombreRol']= NULL;
+                    $resultado[$i]['Rol']= NULL;
                 }else {
                     $resultado[$i]['Usuario']= "Si";
                     $resultado[$i]['IdRol']=  $usuarios[0]['IdRol'];
-                    $resultado[$i]['NombreRol']=  $usuarios[0]['NombreRol'];
+                    $resultado[$i]['Rol']=  $usuarios[0]['NombreRol'];
                 }
                 $i++;
             }
