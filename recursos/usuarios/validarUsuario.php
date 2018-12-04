@@ -11,10 +11,13 @@
 
         $sql="SELECT 	S.Id as 'Id',
                         S.Password  as 'Password',
-                        TPU.Descripcion as 'TipoUsuario'
-                FROM usuarios AS S
-                    INNER JOIN tiposusuarios AS TPU
-                        ON TPU.Id = S.TiposUsuarios_id
+                        TPU.Descripcion as 'TipoUsuario',
+                        CONCAT(E.PrimerNombre,' ',E.SegundoNombre,' ',E.PrimerApellido,' ',E.SegundoApellido) as 'NombreEmpleado'
+               FROM usuarios AS S
+                   INNER JOIN tiposusuarios AS TPU
+                       ON TPU.Id = S.TiposUsuarios_id
+                     INNER JOIN empleados AS E
+                         ON E.Id = S.Empleados_id
                 WHERE Usuario = $usuario"; // Consulta a realizar 
 
         $miConexion->EjecutarSQL($sql); // Metodo que realiza la consulta a la base de datos  
@@ -34,7 +37,7 @@
                 $respuesta->preparar(404,"contaseña error"); 
                 }else{
                     $respuesta->preparar(200,"Acceso correcto");
-                    $datos = array('usuario' => $usuario,'IdUsuario'=> $resultado[0]['Id'],'TipoUsuario'=> $resultado[0]['TipoUsuario']);
+                    $datos = array('usuario' => $usuario,'IdUsuario'=> $resultado[0]['Id'],'TipoUsuario'=> $resultado[0]['TipoUsuario'],'nOmbreEmPleado'=>$resultado[0]['NombreEmpleado'] );
                     $miToken->prepararToken($datos);
                 }   
         }
