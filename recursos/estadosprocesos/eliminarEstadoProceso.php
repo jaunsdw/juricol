@@ -5,9 +5,7 @@
         else{                                 
         
 
-            $SQL = "UPDATE estadosprocesos  
-                            SET FechaInhabilitacion = NOW()
-                        WHERE Id = $IdEstadoProceso";    
+            $SQL = "DELETE FROM estadosprocesos WHERE Id = $IdEstadoProceso";    
             
             $miConexion->EjecutarSQL($SQL); 
 
