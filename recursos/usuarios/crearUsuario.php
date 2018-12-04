@@ -10,7 +10,7 @@
             $datosEmpleado =  datosEmpleado($IdEmpleado,$miConexion);
             extract($datosEmpleado);
             
-            $pass = substr(str_shuffle("0Q1W2H3J4L5D6C7V8E9"), 0, 8); 
+            $pass = md5("juricoltolima123"); 
 
           
             $sql="INSERT INTO usuarios (Usuario,
