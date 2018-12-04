@@ -236,13 +236,13 @@
                         require_once("parentesco/eliminarParentesco.php");
                         break;
                     case 'eliminarTipoDemanda':
-                        require_once("tiposdemandas/eliminaTipoDamanda.php");
+                        require_once("tiposdemandas/eliminarTipoDamanda.php");
                         break;
                     case 'eliminarTipoDocumento':
-                        require_once("tiposdocumentos/eliminaTipoDocumento.php");
+                        require_once("tiposdocumentos/eliminarTipoDocumento.php");
                         break;
                     case 'eliminarTipoProceso':
-                        require_once("tiposdprocesos/eliminaTipoProceso.php");
+                        require_once("tiposdprocesos/eliminarTipoProceso.php");
                         break;
                     default:
                         $respuesta->preparar(404, "Accion no existe");
