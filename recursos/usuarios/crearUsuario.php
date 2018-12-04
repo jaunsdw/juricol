@@ -34,9 +34,9 @@
             }else{
 
 
-                $email =  enviarEmail($CorreoElectronico,$pass);
+                $email =  @enviarEmail($CorreoElectronico,$pass);
                 $resultado = $miConexion->ConsultarIdInsertado();
-                $respuesta->preparar(200,"Usuario creado N° ".$resultado." y ".$email['mensaje']);
+                $respuesta->preparar(200,"Usuario creado # ".$resultado." y ".$email['mensaje']);
             
  
             }
