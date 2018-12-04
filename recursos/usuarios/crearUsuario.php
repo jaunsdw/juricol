@@ -16,11 +16,13 @@ if ($miConexion->GetCodigoRespuesta() == 503 ){
             $sql="INSERT INTO usuarios (Usuario,
                                         Password,
                                         Empleados_id,
+                                        TiposUsuarios_id,
                                         FechaCreacion,
                                         CodigoAsociado)
                                 VALUES  ($Documento,
                                         '$pass',
                                         $IdEmpleado,
+                                        $IdRol,
                                         NOW(),
                                         NULL)";
 
