@@ -236,7 +236,7 @@
                         require_once("parentesco/eliminarParentesco.php");
                         break;
                     case 'eliminarTipoDemanda':
-                        require_once("tiposdemandas/eliminarTipoDamanda.php");
+                        require_once("tiposdemandas/eliminarTipoDemanda.php");
                         break;
                     case 'eliminarTipoDocumento':
                         require_once("tiposdocumentos/eliminarTipoDocumento.php");
