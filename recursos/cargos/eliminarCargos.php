@@ -5,9 +5,7 @@
         else{                                 
         
 
-            $SQL = "UPDATE cargos  
-                            SET FechaInhabilitacion = NOW()
-                        WHERE Id = $IdCargo";    
+            $SQL = "DELETE FROM cargos WHERE Id = $IdCargo";    
             
             $miConexion->EjecutarSQL($SQL); 
 
