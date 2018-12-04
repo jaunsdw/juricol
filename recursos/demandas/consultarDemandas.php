@@ -7,17 +7,14 @@
             if (!(isset($IdEmpleado)) || empty($IdEmpleado)) {
                     $sql="SELECT 
                                 D.Id AS 'IdDemanda',
-                                D.Clientes_id AS 'IdCliente',
                                 CONCAT(C.PrimerNombre,' ',C.SegundoNombre,' ',C.PrimerApellido,' ',C.SegundoApellido) as 'NombreCliente',
                                 D.NumDemanda AS 'NumDemanda',
-                                D.TiposDemandas_id AS 'IdTipoDemanda',
                                 TPS.Descripcion AS 'NombreTipoDemanda',
-                                D.Titular_id AS 'IdTitular',
                                 CONCAT(E1.PrimerNombre,' ',E1.SegundoNombre,' ',E1.PrimerApellido,' ',E1.SegundoApellido) as 'NombreTitular',
-                                D.EstadosProcesos_id AS 'IdEstadoProceso',
                                 IF(D.Finalizada = 1,'Si','No') AS 'Finalizacion',
                                 ESP.Descripcion AS 'NombreEstadoProceso',
-                                D.FechaCreacion AS 'FechaCreacion',
+                                            TPP.Descripcion AS 'NombreTipoProceso',
+                                            J.Descripcion AS 'NombreJuzgado',
                                 (SELECT  ED.Descripcion
                                     FROM movimientos AS M
                                         INNER JOIN estadosdemandas AS ED
@@ -46,7 +43,11 @@
                                 INNER JOIN empleados AS E2
                                     ON E2.Id = D.Suplente_id
                                 INNER JOIN estadosprocesos AS ESP
-                                    ON ESP.Id = D.EstadosProcesos_id";
+                                    ON ESP.Id = D.EstadosProcesos_id
+                                INNER JOIN tipoprocesos AS TPP
+                                    ON TPP.Id = D.TiposProcesos_id
+                                INNER JOIN juzgados AS J 
+                                    ON J.Id = D.Juzgado_id ";
             } else {
                 $sql="SELECT 
                             D.Id AS 'IdDemanda',

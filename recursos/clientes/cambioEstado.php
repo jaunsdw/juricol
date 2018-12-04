@@ -5,6 +5,7 @@
         else{              
             
             $estadoActual = verificarEstadoActual($IdCliente,$miConexion);
+            $demandas = verificarDemandas($IdCliente,$miConexion);
             
             if ($estadoActual == "Activo") {
                 $nuevoEstado =  "Inactivo";

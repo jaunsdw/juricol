@@ -43,7 +43,6 @@
                 
             }
 
- 
             $miConexion->EjecutarSQL($SQL); 
 
             if ( $miConexion->GetCodigoRespuesta() == 400 ) {   
@@ -52,8 +51,29 @@
                 
             }
             else{                                      
+                
+                if ($IdRol == 0) {
+                    $respuesta->preparar(200,$miConexion->ConsultarModificaciones());
+                } else {
+                    
+                    $SQL = "UPDATE usuarios  
+                                    SET TiposUsuarios_id = $IdRol
+                                WHERE  Empleados_id = $IdEmpleado";
 
-                $respuesta->preparar(200,$miConexion->ConsultarModificaciones());
+                    $miConexion->EjecutarSQL($SQL);
+
+                    if ( $miConexion->GetCodigoRespuesta() == 400 ) {   
+                        $error = $miConexion->GetError();
+                        $respuesta->preparar(400, "Error al consultar (".$SQL.") ".$error);
+                        
+                    }
+                    else{    
+
+                    $respuesta->preparar(200,$miConexion->ConsultarModificaciones());
+                    }
+                }
+                
+                
                 
             }
 
