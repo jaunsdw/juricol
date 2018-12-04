@@ -3,11 +3,13 @@
             $respuesta->preparar(503, "Servicio No disponible BD");
         }
         else{              
-            
-            $estadoActual = verificarEstadoActual($IdCliente,$miConexion);
+           
             $demandas = verificarDemandas($IdCliente,$miConexion);
 
-            if (condition) {
+            if ($demandas != "ok") {
+
+                 
+                $estadoActual = verificarEstadoActual($IdCliente,$miConexion);
 
                 if ($estadoActual == "Activo") {
                     $nuevoEstado =  "Inactivo";
@@ -33,12 +35,8 @@
                 }
 
             } else {
-                    $respuesta->preparar(404,"El cliente tiene demandas activas");
+                    $respuesta->preparar(404,$demandas);
             }
-            
-            
-
-
         }
 
     $respuesta->responder();
@@ -47,6 +45,17 @@
 
 
     function verificarDemandas($IdCliente,$miConexion){
+        $sql="SELECT * 
+        FROM demandas
+       WHERE Clientes_id = $IdCliente AND Finalizada = 0";
+
+            $miConexion->EjecutarSQL($sql);
+            $resultado = $miConexion->GetResultados();
+            if (empty($resultado)) {
+                return "ok";
+            } else {
+                return "Este cliente tiene demandas sin finalizar";
+            }
         
     }
 
