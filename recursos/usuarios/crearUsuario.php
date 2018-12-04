@@ -10,7 +10,7 @@
             $datosEmpleado =  datosEmpleado($IdEmpleado,$miConexion);
             extract($datosEmpleado);
             
-            $pass = md5("juricoltolima123"); 
+            $pass = md5("juricoltolima123");  
 
           
             $sql="INSERT INTO usuarios (Usuario,
