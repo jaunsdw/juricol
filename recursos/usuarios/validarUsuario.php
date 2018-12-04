@@ -37,7 +37,7 @@
             }elseif(!($resultado["0"]["Password"] == $password)){  // Verificacion de contraseña del usuario 
                 $respuesta->preparar(404,"contaseña error"); 
                 }else{
-                    if ($resultado[0]['IdEmpleado']) == NULL {
+                    if ($resultado[0]['IdEmpleado'] == NULL) {
                         $respuesta->preparar(200,"Acceso correcto");
                         $datos = array('usuario' => $usuario,'IdUsuario'=> $resultado[0]['Id'],'TipoUsuario'=> $resultado[0]['TipoUsuario'],'NombreEmpleado'=>'Administrador del sistema' );
                         $miToken->prepararToken($datos);
