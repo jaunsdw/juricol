@@ -69,16 +69,16 @@
                     $respuesta->responder();
                     break;    
                 case 'empty':
-                    $respuesta->preparar(200, "No existe codigo registrado");
+                    $respuesta->preparar(404, "No existe codigo registrado");
                     $respuesta->responder();
                     break;
                 case 'NULL':
-                    $respuesta->preparar(200, "No existe codigo registrado");
+                    $respuesta->preparar(404, "No existe codigo registrado");
                     $respuesta->responder();
                 default:
                     
                     if (!($Codigo == $validar)){
-                        $respuesta->preparar(200, "El codigo es incorrecto");
+                        $respuesta->preparar(404, "El codigo es incorrecto");
                         $respuesta->responder();
                     }else {
                         $respuesta->preparar(200, "El codigo es correcto");
