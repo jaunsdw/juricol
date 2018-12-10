@@ -10,7 +10,6 @@
                     SET Password = '$NuevaClave'
                     WHERE Usuario = $NomUsuario"; 
 
-
             $resultado = cambiarContraseña($miConexion,$sql);
             $respuesta->preparar($resultado['Codigo'],$resultado['Mensaje']);
             $respuesta->responder();
@@ -78,7 +77,7 @@
         }else{
 
             $resultado = $miConexion->ConsultarModificaciones();
-            return array("Codigo"=>200,"Mensaje"=>"Filas modificadas ".$resultado);
+            return array("Codigo"=>200,"Mensaje"=>$resultado);
         }
     }
         

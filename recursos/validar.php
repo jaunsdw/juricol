@@ -3,6 +3,20 @@
     header("Access-Control-Allow-Headers:*");
     header("Access-Control-Allow-Methods:*");
 
+    require_once("../servicios/conexionbd.php");  
+    require_once("../servicios/token.php");
+    require_once("../servicios/controlrespuesta.php");  // Llamado al servicio "controlrespuesta", quien es el encargado de administrar
+    // las respuestas que retornen todos los recursos
+
+    $miToken = new Token;
+    $resultado = NULL;  // Inicio de variable para resultados 
+    $miConexion = new ConexionBD; // Instancia de la clase ConeccionBD
+    $respuesta = new ControlRespuesta($miConexion); // instancia de la clase ControlRespuesta
+    $miConexion->Conectar(); // Metodo que ejecuta la conexion con la base de datos
+     
+
+
+
     
     if($_SERVER['REQUEST_METHOD'] == "OPTIONS"){
 
@@ -33,19 +47,19 @@
                 @$accion = validarAccion($post_vars["accion"]);
             }
 
-            acceder($accion,$token,$post_vars);
+            acceder($accion,$token,$post_vars,$miToken,$miConexion,$respuesta);
     
         }elseif ($_SERVER['REQUEST_METHOD'] == "GET") {
 
             @$accion = validarAccion($_GET['accion']);
-            @acceder($accion,$token,$_GET);
+            @acceder($accion,$token,$_GET,$miToken,$miConexion,$respuesta);
     
         }elseif ($_SERVER['REQUEST_METHOD'] == "DELETE"){
 
             header("Access-Control-Allow-Methods: DELETE"); //Admicion para el metodo delete en especifico 
 
             @$accion = validarAccion($_GET['accion']);
-            @acceder($accion,$token,$_GET);
+            @acceder($accion,$token,$_GET,$miToken,$miConexion,$respuesta);
         }else {
             $respuesta->preparar(401,'Llamado por metodo erroneo');
             $respuesta->responder();
@@ -65,25 +79,7 @@
         
     }
 
-    function acceder($accion,$token,$info){
-
-
-        require_once("../servicios/conexionbd.php");  
-        require_once("../servicios/token.php");
-        require_once("../servicios/controlrespuesta.php");  // Llamado al servicio "controlrespuesta", quien es el encargado de administrar
-        // las respuestas que retornen todos los recursos
-    
-        require_once ('../../vendor/autoload.php');
-    
-        $miToken = new Token;
-        $resultado = NULL;  // Inicio de variable para resultados 
-        $miConexion = new ConexionBD; // Instancia de la clase ConeccionBD
-        $respuesta = new ControlRespuesta($miConexion); // instancia de la clase ControlRespuesta
-        $miConexion->Conectar(); // Metodo que ejecuta la conexion con la base de datos
-         
-        
-     
-
+    function acceder($accion,$token,$info,$miToken,$miConexion,$respuesta){
 
         if(gettype($accion) != "array"){
 

@@ -6,8 +6,8 @@
     $miConexion = new ConexionBD; // Instancia de la clase ConeccionBD
     $respuesta = new ControlRespuesta($miConexion); // instancia de la clase ControlRespuesta
     $miConexion->Conectar(); // Metodo que ejecuta la conexion con la base de datos
-
-
+    require_once  '../../../vendor/autoload.php';
+    $mpdf = new \Mpdf\Mpdf();
     if ($miConexion->GetCodigoRespuesta() == 503 ){
         $respuesta->preparar(503,"Servicio No disponible BD");
     }else{
@@ -21,7 +21,11 @@
         
 
        $datos = obtenerDemandasPorJuzgados($juzgados,$miConexion); 
-
+       ob_start();
+       include "RdemandasPorJuzgado.php";
+       $content  =  ob_get_clean();
+       $mpdf->WriteHTML($content);
+       $mpdf->Output();
  
     }
 

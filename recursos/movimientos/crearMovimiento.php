@@ -47,15 +47,7 @@ if ($miConexion->GetCodigoRespuesta() == 503 ){
 
         }else {
 
-            $existencia = verificarExistencia($IdDemanda,$IdEstadoDemanda,$miConexion);
-
-            if ($existencia != "ok") {
-                
-                $respuesta->preparar(403,$existencia);
-                $respuesta->responder();  
-
-            } else {
-
+ 
                 $existencia = verificarFecha($IdDemanda,$FechaMovimiento,$miConexion);
 
                 if ($existencia != "ok") {
@@ -86,17 +78,19 @@ if ($miConexion->GetCodigoRespuesta() == 503 ){
                     $respuesta->responder();  
                 }
             }
-        }
+        
     }
 
     function verificarFecha($IdDemanda,$FechaMovimiento,$miConexion){
 
         $sql="SELECT * 
             FROM movimientos
-            WHERE Demandas_id = $IdDemanda AND FechaMovimiento = $FechaMovimiento ";
+            WHERE Demandas_id = $IdDemanda AND FechaMovimiento = '$FechaMovimiento' ";
+
 
         $miConexion->EjecutarSQL($sql);
         $resultado = $miConexion->GetResultados();
+
         if (empty($resultado)) {
             return "ok";
         } else {
@@ -104,22 +98,6 @@ if ($miConexion->GetCodigoRespuesta() == 503 ){
         }
     }
 
-    function verificarExistencia($IdDemanda,$IdEstadoDemanda,$miConexion){
 
-        $sql="SELECT * 
-                FROM movimientos
-                    WHERE Demandas_id = $IdDemanda AND EstadosDemandas_id = $IdEstadoDemanda ";
-
-        $miConexion->EjecutarSQL($sql);
-        $resultado = $miConexion->GetResultados();
-        if (empty($resultado)) {
-            return "ok";
-        } else {
-            return "Esta demanda con este movimiento ya existe";
-        }
-    
-    }
-
-             
-
+            
  ?>                     
