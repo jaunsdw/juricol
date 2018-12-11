@@ -244,6 +244,9 @@
                     case 'eliminarTipoProceso':
                         require_once("tiposprocesos/eliminarTipoProceso.php");
                         break;
+                    case 'eliminarMovimiento':
+                        require_once("movimientos/eliminarMovimientos.php");
+                        break;
                     default:
                         $respuesta->preparar(404, "Accion no existe");
                         $respuesta->responder();

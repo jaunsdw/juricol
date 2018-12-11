@@ -13,7 +13,7 @@
     <div id="contenedor">
         <header>
             <center>
-                <h1>Demandas asignadas a abogados</h1>
+                <h1>Demandas por tipo de proceso </h1>
                 <h3 ><?php echo $hoy['weekday']." ".$hoy['mday']." de ".$hoy['month']." del ".$hoy['year'] ;  ?></h3>
             </center>
             <p id="descripcion">En cada sección se observa como titulo el nombre del Tipo de proceso asignado a las demandas, 
