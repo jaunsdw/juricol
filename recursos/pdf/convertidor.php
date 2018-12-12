@@ -92,7 +92,7 @@
                         Id,
                         Descripcion,
                         DiasLimite 
-                    FROM estadosDemandas";
+                    FROM estadosdemandas";
 
         $miConexion->EjecutarSQL($sql);        
  

@@ -9,8 +9,8 @@
         }else{
             $datosEmpleado =  datosEmpleado($IdEmpleado,$miConexion);
             extract($datosEmpleado);
-            
-            $pass = md5("juricoltolima123");  
+            $passEnvio = str_shuffle("JuRiCoLToLiMa".rand(5,30));
+            $pass = md5($passEnvio);  
 
           
             $sql="INSERT INTO usuarios (Usuario,
@@ -34,7 +34,7 @@
             }else{
 
 
-                $email =  @enviarEmail($CorreoElectronico,$pass);
+                $email =  @enviarEmail($CorreoElectronico,$passEnvio);
                 $resultado = $miConexion->ConsultarIdInsertado();
                 $respuesta->preparar(200,"Usuario creado # ".$resultado." y ".$email['mensaje']);
             

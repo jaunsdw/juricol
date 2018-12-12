@@ -28,7 +28,7 @@
                         require_once("demandas/consultarDemandas.php");
                         break;
                     case 'consultarTiposDocumentos':
-                        require_once("tiposDocumentos/consultarTipoDoc.php");
+                        require_once("tiposdocumentos/consultarTipoDoc.php");
                         break;
                     case 'consultarParentescos':
                         require_once("parentesco/consultarParentescos.php");
