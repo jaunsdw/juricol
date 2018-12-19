@@ -1,19 +1,23 @@
-
 <?php
+
 
    //$fileName = $_SERVER["DOCUMENT_ROOT"]."/juricol/recursos/pdf/ESTADO3.pdf";
 
-  $fileName = $_FILES['MiArchivo']["tmp_name"];
+
+    $fileName = $_FILES['MiArchivo']["tmp_name"];
+
+
     $reader = new \Asika\Pdf2text;
     $datosConvertidos = $reader->decode($fileName);
-
+      
     if ($miConexion->GetCodigoRespuesta() == 503 ){
+   
         $respuesta->preparar(503,"Servicio No disponible BD");
         $respuesta->responder();
     }else{
-        
+     
         $diasEstados =  consultarEstados($miConexion);
-
+        
         if(empty($diasEstados) || $diasEstados == NULL){
             $respuesta->preparar(200,"No hay estados registrados");
             $respuesta->responder();
@@ -33,9 +37,6 @@
     }
 
   
-
-
-
     function cambiosDeEstado($demandas,$miConexion,$diasEstados){
 
         $num = count($demandas);
@@ -87,17 +88,20 @@
     }
 
     function  consultarEstados($miConexion){
-        
-        $sql="SELECT   
+         
+                
+       $sql="SELECT   
                         Id,
                         Descripcion,
                         DiasLimite 
                     FROM estadosdemandas";
 
-        $miConexion->EjecutarSQL($sql);        
+        $miConexion->EjecutarSQL($sql);    
+   
  
         $resultado = $miConexion->GetResultados();
 
+                
         if( empty($resultado) || $resultado == NULL){
 
             return NULL;
@@ -105,7 +109,7 @@
         }else {
 
             return $resultado;    
-        }
+       }
     }
 
     function calcularFechaLimite($fechaInicio,$estado,$miConexion,$diasEstados){
@@ -243,7 +247,6 @@
         }
         return $total;
     }
-
 
 
 ?>

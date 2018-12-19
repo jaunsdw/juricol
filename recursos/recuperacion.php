@@ -137,7 +137,7 @@
                 if(empty($resultado)){
                     return "empty";
                 }else{
-                    return $resultado;
+                    return $resultado[0];
                 }
             }
         }

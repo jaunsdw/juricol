@@ -5,21 +5,38 @@
         else{                                 
         
 
-            $SQL = "UPDATE paises  
-                            SET FechaInhabilitacion = NOW()
-                        WHERE Id = $IdPais";    
-            
+            $SQL = "CALL integridad('Paises_id', $IdPais)";    
+                
             $miConexion->EjecutarSQL($SQL); 
 
             if ( $miConexion->GetCodigoRespuesta() == 400 ) {   
                 $error = $miConexion->GetError();
                 $respuesta->preparar(400, "Error al consultar (".$SQL.") ".$error);
-                
+             
             }
-            else{                                      
+            else{   
+                                                   
+                $result = $miConexion->GetResultados(); 
 
-                $respuesta->preparar(200,$miConexion->ConsultarModificaciones());
+                if( $result[0] != 0  ){
+                    $respuesta->preparar(400,"No se puede eliminar debido a que este regristro se encuentra en uso");
+                }else {
+
+                    $SQL = "DELETE FROM paises WHERE Id = $IdPais ";     
+                    
+                    $miConexion->EjecutarSQL($SQL); 
+    
+                    if ( $miConexion->GetCodigoRespuesta() == 400 ) {   
+                        $error = $miConexion->GetError();
+                        $respuesta->preparar(400, "Error al consultar (".$SQL.") ".$error);
                 
+                    }
+                    else{                                      
+    
+                        $respuesta->preparar(200,$miConexion->ConsultarModificaciones());
+                      
+                    }
+                } 
             }
 
         }

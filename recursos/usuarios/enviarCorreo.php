@@ -15,16 +15,20 @@ if(mail($correoR,$asunto,$mensaje)){
     $miConexion->EjecutarSQL($sql);
 
     if ($miConexion->GetCodigoRespuesta() == 400){
-        $error = $miConexion->GetError();
-        $EstadoCodigo = array("400"=>"Error al consultar ($sql)".$error);
+        $mensaje = "Error al consultar ($sql)=> ".$miConexion->GetError();
+        $EstadoCodigo = 400;
     }else{
-
-        $resultado = $miConexion->ConsultarModificaciones();
-        $EstadoCodigo = array("200"=>"Filas modificadas".$resultado);
-
+        if( $miConexion->ConsultarModificaciones() <= 0 ){
+            $mensaje = "No se actualizo el usuario";
+            $EstadoCodigo = 400;      
+        }
+        else{
+            $mensaje = "Codigo creado satisfactorio";
+            $EstadoCodigo = 200;      
+        }
     }
 
-    $respuesta->preparar(200, "Correo Enviado".$EstadoCodigo);
+    $respuesta->preparar($EstadoCodigo, "Correo Enviado (".$mensaje.")");
     $respuesta->responder();
 }else{
     $respuesta->preparar(404, "Problemas en el envio de corrreo");

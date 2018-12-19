@@ -4,22 +4,38 @@
         }
         else{                                 
         
-
-            $SQL = "UPDATE tiposdemandas  
-                            SET FechaInhabilitacion = NOW()
-                        WHERE Id = $IdTipoDemanda";    
             
+            $SQL = "CALL integridad('TiposDemandas_id',$IdTipoDemanda)";    
+                
             $miConexion->EjecutarSQL($SQL); 
 
             if ( $miConexion->GetCodigoRespuesta() == 400 ) {   
                 $error = $miConexion->GetError();
                 $respuesta->preparar(400, "Error al consultar (".$SQL.") ".$error);
-                
+             
             }
-            else{                                      
+            else{   
+                                                   
+                $result = $miConexion->GetResultados(); 
 
-                $respuesta->preparar(200,$miConexion->ConsultarModificaciones());
+                if( $result[0] != 0  ){
+                    $respuesta->preparar(400,"No se puede eliminar debido a que este regristro se encuentra en uso");
+                }else {
+                    $SQL = "DELETE FROM tiposdemandas WHERE Id = $IdTipoDemanda";     
+                    
+                    $miConexion->EjecutarSQL($SQL); 
+    
+                    if ( $miConexion->GetCodigoRespuesta() == 400 ) {   
+                        $error = $miConexion->GetError();
+                        $respuesta->preparar(400, "Error al consultar (".$SQL.") ".$error);
                 
+                    }
+                    else{                                      
+    
+                        $respuesta->preparar(200,$miConexion->ConsultarModificaciones());
+                      
+                    }
+                } 
             }
 
         }

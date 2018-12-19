@@ -70,6 +70,7 @@
                 }
 
             break;
+            
             case 'POST':
                 switch ($accion) {
                     case 'crearCliente':
@@ -257,15 +258,12 @@
 
             
             break;
+             
             default:
-            $respuesta->preparar(403, "Llamado Erroneo"); /* Metodo que recibe un codigo de HTTP con unos resultados
-                                                            para contruir una cabecera u luego ser retornada a quien llamo al recurso*/
+            $respuesta->preparar(403, "Llamado Erroneo"); // Metodo que recibe un codigo de HTTP con unos resultados
+                                                           // para contruir una cabecera u luego ser retornada a quien //llamo al recurso
             $respuesta->responder(); // Metodo que retorna la respuesta al ente que lo solicita
                 break;
-        }  
-        
-
-
-
+        } 
 
 ?>
