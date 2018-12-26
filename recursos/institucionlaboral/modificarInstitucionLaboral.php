@@ -6,7 +6,7 @@
         
             $SQL = "UPDATE institucionlaboral  
                             SET Descripcion = '$institucionNueva',
-                                Ciudad_id = $IdCiudad
+                                CiudadResidencia_id = $IdCiudad
                         WHERE Id = $IdInstitucion ";    
             
             $miConexion->EjecutarSQL($SQL); 

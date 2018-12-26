@@ -4,7 +4,7 @@
         $respuesta->preparar(503,"Servicio No disponible BD");
     }else{
 
-        $sql="INSERT INTO institucionlaboral (Descripcion, Ciudad_id)
+        $sql="INSERT INTO institucionlaboral (Descripcion, CiudadResidencia_id)
                             VALUES ('$institucionNueva', $IdCiudad)";
 
         $miConexion->EjecutarSQL($sql);

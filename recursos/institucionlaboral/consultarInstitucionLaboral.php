@@ -11,7 +11,7 @@
                             ciudades.Descripcion as 'NombreCiudad'
                     FROM institucionlaboral 
                         INNER JOIN ciudades
-                            ON institucionlaboral.Ciudad_id = ciudades.Id
+                            ON institucionlaboral.CiudadResidencia_id = ciudades.Id
                         WHERE institucionlaboral.FechaInhabilitacion IS NULL";
         }else {
             $sql="SELECT * FROM institucionlaboral WHERE Ciudad_id = $IdCiudad AND FechaInhabilitacion IS NULL";
